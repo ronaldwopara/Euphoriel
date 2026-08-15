@@ -2,7 +2,7 @@
 {% comment %} ── Google Fonts (same as quiz-page) ── {% endcomment %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   @font-face {
@@ -18,19 +18,19 @@
   .bundle-page-wrap h1,
   .bundle-page-wrap h2,
   .bundle-page-wrap h3 {
-    font-family: 'Cormorant Bundle', 'Cormorant Garamond', serif !important;
+    font-family: 'Cormorant Garamond', 'Cormorant Bundle', serif !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-synthesis: none;
+    -webkit-text-stroke: 0.3px rgba(31, 76, 53, 0.3);
   }
   .bundle-page-wrap h1 {
     font-weight: 500 !important;
-    font-variation-settings: 'wght' 500;
   }
   .bundle-page-wrap h2,
   .bundle-page-wrap h3 {
     font-weight: 700 !important;
-    font-variation-settings: 'wght' 700;
   }
   /* Locks width/display explicitly — Tailwind's utility classes never set `width`
      on this button, so a theme-wide `button { width: 100% }` mobile rule (common
@@ -62,6 +62,14 @@
     border: 0 !important;
     border-radius: 0 !important;
     filter: none !important;
+  }
+  .bundle-page-wrap .jdgm-preview-badge .jdgm-star.jdgm--on,
+  .bundle-page-wrap .jdgm-preview-badge .jdgm-star.jdgm--half {
+    color: #1F4C35;
+  }
+  .bundle-page-wrap .jdgm-preview-badge .jdgm-prev-badge__text {
+    color: #6b7280;
+    font-size: 0.875rem;
   }
 </style>
 
@@ -134,10 +142,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" alt="Radiance Ritual Shower Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(96)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['radiance-ritual-shower-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Radiance Ritual Shower Oil</h3>
                         <p class="hidden">$34.99 CAD</p>
@@ -167,10 +172,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" alt="Rejuvenating Shea Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(68)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['rejuvenating-shea-body-butter'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Rejuvenating Shea Body Butter</h3>
                         <p class="hidden">$29.99 CAD</p>
@@ -184,10 +186,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" alt="Revitalizing Mango Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(102)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['revitalizing-mango-body-butter'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Revitalizing Mango Body Butter</h3>
                         <p class="hidden">$29.99 CAD</p>
@@ -201,10 +200,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" alt="Golden Aura Body Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(85)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['golden-aura-body-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Golden Aura Body Oil</h3>
                         <p class="hidden">$31.99 CAD</p>
@@ -234,10 +230,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" alt="Renewal Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(123)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['renewal-elixir-face-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Renewal Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
@@ -251,10 +244,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" alt="Balance Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(107)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['balance-elixir-face-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Balance Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
@@ -268,10 +258,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt="Harmonic Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(90)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['harmonic-elixir-face-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Harmonic Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
@@ -285,10 +272,7 @@
                     <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" alt="Timeless Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="flex items-center gap-2 mb-1.5">
-                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                        <span class="text-gray-500 text-sm">(64)</span>
-                    </div>
+                    <div class="jdgm-widget jdgm-preview-badge mb-1.5" data-id="{{ all_products['timeless-elixir-face-oil'].id }}"></div>
                     <div class="mb-1">
                         <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:700;">Timeless Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
@@ -494,6 +478,18 @@
             if (event.persisted) renderBundleBar();
         });
     })();
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.jdgm) {
+      window.jdgm.customWidgets.initAll();
+    } else {
+      document.addEventListener('jdgm.all_widgets.before_load', function () {
+        window.jdgm.customWidgets.initAll();
+      });
+    }
+  });
 </script>
 
 {% schema %}
