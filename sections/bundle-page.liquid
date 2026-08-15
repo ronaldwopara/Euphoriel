@@ -1,0 +1,471 @@
+
+{% comment %} ── Google Fonts (same as quiz-page) ── {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  #shopify-section-{{ section.id }} {
+    scroll-behavior: smooth;
+  }
+  /* Locks width/display explicitly — Tailwind's utility classes never set `width`
+     on this button, so a theme-wide `button { width: 100% }` mobile rule (common
+     in Shopify themes) would otherwise apply unopposed and blow up the sticky bar. */
+  #bundle-cta {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    flex: 0 0 auto !important;
+  }
+</style>
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    margin: 0;
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% comment %} Tailwind is used for all utility classes below. Skip this tag if the theme already loads Tailwind elsewhere on the page. {% endcomment %}
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div class="bundle-page-wrap section-{{ section.id }}-padding bg-white pb-20 md:pb-24">
+
+    <!-- Hero Section --><section class="relative w-full bg-[#F2EFE6] overflow-hidden">
+        <div class="relative w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-2 justify-between px-6 md:px-12 py-10 md:py-14 lg:py-16">
+            <div class="w-full max-w-[760px] lg:ml-[55px]" style="font-family:'DM Sans', sans-serif;">
+                <h1 class="text-[#1F4C35] font-normal text-5xl md:text-7xl lg:text-8xl" style="font-family:'Cormorant Garamond', serif; line-height:1.02; letter-spacing:-0.02em;">
+                    Build Your<br>Own Bundle
+                </h1>
+                <p class="mt-3 text-[#1F4C35] font-medium text-xl md:text-2xl lg:text-3xl" style="line-height:1.7;">
+                    Choose 2+ products to<br>unlock <span class="font-bold">15% off</span>.
+                </p>
+            </div>
+
+            <!-- Product Photo Card --><div class="relative w-full max-w-[420px] md:max-w-[540px] lg:max-w-none lg:w-[720px] flex-shrink-0 lg:mr-[65px]">
+                <!-- Soft cast shadow behind the card -->
+                <div class="absolute left-1/2 -translate-x-1/2 bottom-0 w-[80%] h-10 md:h-14 bg-[#1F4C35]/25 blur-2xl rounded-full" aria-hidden="true"></div>
+
+                <div class="relative aspect-square overflow-hidden ring-1 ring-[#1F4C35]/10 shadow-[0_25px_50px_-20px_rgba(31,76,53,0.35)]">
+                    <img src="https://res.cloudinary.com/s1km9nr7/image/upload/v1785638583/euphoriel/3_Step_Glow_Routine_Products.avif" alt="" class="w-full h-full object-contain" style="filter: sepia(10%) saturate(118%) brightness(103%) contrast(101%);">
+
+                    <!-- Vignette to soften the flat "sticker" edges -->
+                    <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 55%, rgba(35,25,10,0.16) 100%);" aria-hidden="true"></div>
+
+                    <!-- Warm blend layer to unify badge/photo color temperature -->
+                    <div class="absolute inset-0 pointer-events-none mix-blend-multiply" style="background: linear-gradient(135deg, rgba(214,178,120,0.12), rgba(196,146,86,0.05));" aria-hidden="true"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soft seam into the step section below -->
+        <div class="w-full h-8 md:h-12 bg-gradient-to-b from-[#F2EFE6] to-white" aria-hidden="true"></div>
+    </section>
+
+    <!-- ===================== STEP 1: CLEANSE ===================== -->
+    <section id="step-cleanse" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636615/euphoriel/cleanse.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 1</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Cleanse</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" alt="Radiance Ritual Shower Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(96)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Radiance Ritual Shower Oil</h3>
+                        <p class="hidden">$34.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Cleanses And Conditions In One Step</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Radiance Ritual Shower Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" data-price="$34.99 CAD" data-variant-id="{{ all_products['radiance-ritual-shower-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STEP 2: MOISTURIZE ===================== -->
+    <section id="step-moisturize" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636616/euphoriel/moisture.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 2</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Moisturize</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" alt="Rejuvenating Shea Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(68)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Rejuvenating Shea Body Butter</h3>
+                        <p class="hidden">$29.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Very Dry, Rough Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Rejuvenating Shea Body Butter" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" data-price="$29.99 CAD" data-variant-id="{{ all_products['rejuvenating-shea-body-butter'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" alt="Revitalizing Mango Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(102)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Revitalizing Mango Body Butter</h3>
+                        <p class="hidden">$29.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Normal To Dry Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Revitalizing Mango Body Butter" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" data-price="$29.99 CAD" data-variant-id="{{ all_products['revitalizing-mango-body-butter'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" alt="Golden Aura Body Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(85)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Golden Aura Body Oil</h3>
+                        <p class="hidden">$31.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Dry, Sensitive Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Golden Aura Body Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" data-price="$31.99 CAD" data-variant-id="{{ all_products['golden-aura-body-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STEP 3: NOURISH ===================== -->
+    <section id="step-nourish" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636618/euphoriel/nourish.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 3</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Nourish</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" alt="Renewal Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(123)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Renewal Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Deep Hydration, Visible Glow</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Renewal Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" data-price="$39.99 CAD" data-face-key="renewal" data-variant-id="{{ all_products['renewal-elixir-face-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" alt="Balance Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(107)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Balance Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Oily, Blemish-Prone Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Balance Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" data-price="$39.99 CAD" data-face-key="balance" data-variant-id="{{ all_products['balance-elixir-face-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt="Harmonic Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(90)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Harmonic Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Combination Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Harmonic Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" data-price="$39.99 CAD" data-face-key="harmonic" data-variant-id="{{ all_products['harmonic-elixir-face-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" alt="Timeless Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(64)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Timeless Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Mature, Aging Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Timeless Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" data-price="$39.99 CAD" data-face-key="timeless" data-variant-id="{{ all_products['timeless-elixir-face-oil'].selected_or_first_available_variant.id }}">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STICKY BUNDLE BAR ===================== -->
+    <div id="bundle-bar" class="fixed bottom-0 left-0 w-full bg-[#F2EFE6] border-t border-[#1F4C35]/15 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <div class="flex items-center justify-between gap-3 md:gap-6 px-4 md:px-8 lg:px-12 py-3 md:py-4 max-w-[1440px] mx-auto">
+
+            <!-- Slots -->
+            <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                <div id="bundle-slot-1" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center"></div>
+                <div id="bundle-slot-2" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+            </div>
+
+            <!-- Center label -->
+            <p class="hidden md:block flex-1 text-center text-[#1F4C35] text-base md:text-lg font-semibold" style="font-family:'DM Sans', sans-serif;">Build Your Own Bundle</p>
+
+            <!-- CTA -->
+            <button id="bundle-cta" type="button" class="flex-shrink-0 bg-[#1F4C35] text-white rounded-full px-5 md:px-8 py-3 text-xs md:text-sm font-semibold uppercase whitespace-nowrap" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;">
+                Add 2 items to start
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    (function () {
+        const BUNDLE_KEY  = 'euphorielBundle';
+        const MAX_SLOTS   = 2;
+        const DISCOUNT_AT = 2;
+
+        function getBundle() {
+            try { return JSON.parse(localStorage.getItem(BUNDLE_KEY)) || []; }
+            catch (e) { return []; }
+        }
+
+        function saveBundle(items) {
+            localStorage.setItem(BUNDLE_KEY, JSON.stringify(items));
+        }
+
+        function slotPlaceholder(n) {
+            const labels = { 2: 'Unlock<br>15% Off' };
+            const badge  = `<span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center shadow-sm">${n}</span>`;
+            const label  = labels[n]
+                ? `<span class="text-[#1F4C35] text-[10px] md:text-xs font-semibold leading-tight px-1">${labels[n]}</span>`
+                : '';
+            return badge + label;
+        }
+
+        function renderBundleBar() {
+            const items = getBundle();
+
+            for (let i = 0; i < MAX_SLOTS; i++) {
+                const slot = document.getElementById('bundle-slot-' + (i + 1));
+                if (!slot) continue;
+
+                if (items[i]) {
+                    slot.innerHTML = `
+                        <span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center z-10 shadow-sm">${i + 1}</span>
+                        <span class="bundle-remove absolute inset-1.5 rounded-md bg-black/0 group-hover:bg-black/50 flex items-center justify-center cursor-pointer transition-colors duration-200 z-10" data-index="${i}" aria-label="Remove ${items[i].name}">
+                            <span class="text-white text-base md:text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200">&times;</span>
+                        </span>
+                        <img src="${items[i].img}" alt="${items[i].name}" class="w-full h-full object-contain p-1.5">
+                        <span class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#1F4C35] text-white text-[10px] md:text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">${items[i].name}</span>
+                    `;
+                } else {
+                    slot.innerHTML = slotPlaceholder(i + 1);
+                }
+            }
+
+            document.querySelectorAll('.bundle-remove').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = parseInt(btn.dataset.index, 10);
+                    const items = getBundle();
+                    items.splice(idx, 1);
+                    saveBundle(items);
+                    renderBundleBar();
+                });
+            });
+
+            const cta = document.getElementById('bundle-cta');
+            const ready = items.length >= DISCOUNT_AT;
+            if (items.length === 0) {
+                cta.textContent = 'Add 2 items to start';
+            } else if (!ready) {
+                const remaining = DISCOUNT_AT - items.length;
+                cta.textContent = `Add ${remaining} more to unlock 15%`;
+            } else {
+                cta.textContent = 'Add to Cart';
+            }
+            cta.disabled = !ready;
+            cta.classList.toggle('opacity-50', !ready);
+            cta.classList.toggle('cursor-not-allowed', !ready);
+        }
+
+        window.addToBundle = function (item) {
+            const items = getBundle();
+            if (items.length >= MAX_SLOTS) return;
+            items.push(item);
+            saveBundle(items);
+            renderBundleBar();
+        };
+
+        document.querySelectorAll('.add-to-bundle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                window.addToBundle({
+                    name:      btn.dataset.name,
+                    img:       btn.dataset.img,
+                    price:     btn.dataset.price,
+                    variantId: btn.dataset.variantId,
+                });
+            });
+        });
+
+        // Auto-add the quiz-matched product, e.g. /pages/about?view=build-your-bundle&face=balance
+        const faceKey = new URLSearchParams(window.location.search).get('face');
+        if (faceKey) {
+            const matchBtn = document.querySelector('.add-to-bundle-btn[data-face-key="' + faceKey + '"]');
+            if (matchBtn) {
+                const items = getBundle();
+                const alreadyAdded = items.some(i => i.name === matchBtn.dataset.name);
+                if (!alreadyAdded) {
+                    window.addToBundle({
+                        name:      matchBtn.dataset.name,
+                        img:       matchBtn.dataset.img,
+                        price:     matchBtn.dataset.price,
+                        variantId: matchBtn.dataset.variantId,
+                    });
+                }
+            }
+        }
+
+        // Add the whole bundle to the real Shopify cart, then go to checkout
+        document.getElementById('bundle-cta').addEventListener('click', async function () {
+            const items = getBundle();
+            if (items.length < DISCOUNT_AT) return; // not ready yet — button is disabled anyway
+
+            const lineItems = items
+                .filter(i => i.variantId)
+                .map(i => ({ id: parseInt(i.variantId, 10), quantity: 1 }));
+
+            if (lineItems.length !== items.length) {
+                console.error('Bundle contains an item with no variant ID:', items);
+                alert('Sorry, one of your bundle items could not be added to cart. Please remove it and try again.');
+                return;
+            }
+
+            const cta = this;
+            const originalText = cta.textContent;
+            cta.disabled = true;
+            cta.textContent = 'Adding to cart…';
+
+            try {
+                const res = await fetch('/cart/add.js', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items: lineItems }),
+                });
+                if (!res.ok) throw new Error('Cart add failed with status ' + res.status);
+
+                localStorage.removeItem(BUNDLE_KEY);
+                window.location.href = '/cart';
+            } catch (err) {
+                console.error('Add to cart failed:', err);
+                cta.disabled = false;
+                cta.textContent = originalText;
+                alert('Something went wrong adding your bundle to the cart. Please try again.');
+            }
+        });
+
+        renderBundleBar();
+
+        // If the user navigates Back to this page, the browser may restore it from
+        // bfcache exactly as it was mid-request (button stuck on "Adding to cart…").
+        // Re-render against the current (now-cleared) bundle state to reset it.
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) renderBundleBar();
+        });
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    { "name": "Bundle Page" }
+  ]
+}
+{% endschema %}

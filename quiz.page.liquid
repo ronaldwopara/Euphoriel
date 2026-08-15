@@ -1,0 +1,1069 @@
+
+{% comment %} ── Google Fonts ── {% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Design tokens ── */
+  #shopify-section-{{ section.id }} {
+    --q-green:        #1F4C35;
+    --q-green-hover:  #2d6b4a;
+    --q-green-dark:   #142f21;
+    --q-accent:       #B8875A;
+    --q-accent-hover: #a3764c;
+    --q-bg:           #F5F1E8;
+    --q-bg-soft:      #EFEAE0;
+    --q-border:       #e5e1d6;
+    --q-muted:        #9a978c;
+    --q-body:         #5c5a52;
+    --q-selected-bg:  #eef3ec;
+    --q-ink:          #26241f;
+    --q-font-serif:   'Cormorant Garamond', serif;
+    --q-font-sans:    'DM Sans', sans-serif;
+    --q-radius-pill:  9999px;
+    --q-radius-card:  1.5rem;
+    --q-radius-sm:    0.85rem;
+    --q-shadow-card:  0 30px 70px rgba(20,47,33,0.16), 0 6px 20px rgba(20,47,33,0.08);
+    --q-shadow-img:   0 22px 50px rgba(31,76,53,0.20), 0 4px 14px rgba(0,0,0,0.08);
+  }
+
+  /* ── Reset / base ── */
+  .quiz-page-wrap *, .euphoriel-overlay * { box-sizing: border-box; }
+  .quiz-page-wrap { font-family: var(--q-font-sans); color: var(--q-ink); }
+
+  /* ── Layout ── */
+  .quiz-page-wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - var(--header-height, 80px));
+    min-height: calc(100svh - var(--header-height, 80px));
+    overflow: hidden;
+  }
+
+  .quiz-left-panel {
+    position: relative;
+    width: 44%;
+    background: #ffffff;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .quiz-left-panel__glow {
+    display: none;
+  }
+  .quiz-left-panel__grain {
+    display: none;
+  }
+  .quiz-left-panel__stage {
+    position: absolute; inset: 0;
+  }
+
+  .quiz-right-panel {
+    position: relative;
+    width: 56%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+  }
+  .quiz-right-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 3rem clamp(2.5rem, 5vw, 5rem);
+    max-width: 34rem;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.22em;
+    font-weight: 600; color: var(--q-green); margin-bottom: 1.1rem;
+  }
+  .eyebrow::before {
+    content: ''; width: 22px; height: 1px; background: var(--q-green);
+  }
+
+  .hero-heading {
+    font-family: var(--q-font-serif);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: clamp(2.85rem, 5.4vw, 4.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--q-green);
+    margin: 0 0 1.5rem;
+  }
+  .hero-heading em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--q-green);
+  }
+
+  .hero-sub {
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    font-weight: 500;
+    color: var(--q-body);
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0 0 2.5rem;
+  }
+
+  .hero-footnote {
+    font-size: 0.75rem; color: var(--q-muted);
+    text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+    margin-top: 1.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-footnote .dot { color: var(--q-accent); }
+
+  /* ── Floating product collage (desktop) ── */
+  @keyframes floatIn {
+    from { opacity: 0; transform: translateY(24px) rotate(var(--rot)); }
+    to   { opacity: 1; transform: translateY(0)    rotate(var(--rot)); }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translateY(0)    rotate(var(--rot)); }
+    50%       { transform: translateY(-8px) rotate(var(--rot)); }
+  }
+  .product-img {
+    position: absolute;
+    width: clamp(150px, var(--w), 210px);
+    height: auto;
+    aspect-ratio: 4 / 5;
+    top: var(--t); left: var(--l); right: var(--r);
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: var(--q-shadow-img);
+    animation: floatIn 0.9s ease both, drift 6s ease-in-out infinite;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .product-img:hover { box-shadow: 0 34px 80px rgba(31,76,53,0.30), 0 8px 24px rgba(0,0,0,0.14); z-index: 20 !important; }
+  .img-1 { --rot: -11deg; --w: 34%; --t: 10%; --l: 10%; z-index: 4; animation-delay: 0s,   0.9s; animation-duration: 0.9s, 7s; }
+  .img-2 { --rot:   7deg; --w: 30%; --t: 8%;  --l: 48%; z-index: 3; animation-delay: 0.1s, 1.4s; animation-duration: 0.9s, 5.5s; }
+  .img-4 { --rot:  12deg; --w: 29%; --t: 46%; --l: 50%; z-index: 5; animation-delay: 0.2s, 0.5s; animation-duration: 0.9s, 6.5s; }
+  .img-6 { --rot:   6deg; --w: 35%; --t: 44%; --l: 8%;  z-index: 6; animation-delay: 0.3s, 1.8s; animation-duration: 0.9s, 7.5s; }
+
+  /* ── Mobile hero strip (hidden on desktop) ── */
+  .mobile-hero-strip {
+    display: none;
+  }
+
+  /* ── Slide-up entrance ── */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .slide-up { animation: slideUp 0.8s ease both; }
+  .delay-1  { animation-delay: 0.15s; }
+  .delay-2  { animation-delay: 0.3s; }
+  .delay-3  { animation-delay: 0.45s; }
+  .delay-4  { animation-delay: 0.6s; }
+
+  /* ── Buttons ── */
+  .eq-btn {
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    font-family: var(--q-font-sans); font-weight: 600; font-size: 0.85rem;
+    letter-spacing: 0.13em; text-transform: uppercase;
+    border-radius: var(--q-radius-pill);
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+    border: 1.5px solid transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    appearance: none;
+    -webkit-appearance: none;
+    touch-action: manipulation;
+  }
+  .eq-btn--lg { padding: 20px 3.5rem; font-size: 0.95rem; letter-spacing: 0.15em; }
+  .eq-btn--md { padding: 13px 2rem; }
+  .eq-btn--primary { background: var(--q-green); color: white; }
+
+  #startQuizBtn {
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 22px 3.75rem;
+    letter-spacing: 0.16em;
+    box-shadow: 0 12px 28px rgba(31,76,53,0.22);
+  }
+
+  .eq-btn--ghost { background: none; color: var(--q-green); border-color: var(--q-green); }
+
+  .eq-btn--block { width: 100%; }
+
+  .eq-icon-close {
+    position: absolute; top: 1.15rem; right: 1.15rem;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.35rem; line-height: 1; color: var(--q-muted);
+  }
+  .eq-icon-back { right: auto; left: 1.15rem; }
+  .eq-icon-back[data-hidden="true"] { visibility: hidden; }
+
+  /* ── Overlay base ── */
+  .euphoriel-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    display: none !important;
+    align-items: center; justify-content: center;
+    padding: 1.5rem;
+    pointer-events: none;
+  }
+  .euphoriel-overlay.is-open {
+    display: flex !important;
+    pointer-events: auto;
+  }
+  .overlay-scrim { position: absolute; inset: 0; z-index: 0; }
+
+  .eq-modal-card {
+    position: relative;
+    z-index: 2;
+    background: white;
+    border-radius: var(--q-radius-card);
+    box-shadow: var(--q-shadow-card);
+    border: 1px solid rgba(31,76,53,0.08);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .eq-modal-card--quiz   { max-width: 500px; height: min(480px, 88svh); }
+  .eq-modal-card--lead   { max-width: 460px; max-height: min(680px, 92svh); }
+  .eq-modal-card--result { max-width: 560px; max-height: min(600px, 90svh); }
+
+  .eq-modal-head {
+    flex-shrink: 0;
+    padding: 2.25rem 2.25rem 0;
+  }
+  .eq-modal-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 2.25rem 2.25rem;
+  }
+  .eq-modal-foot {
+    flex-shrink: 0;
+    padding: 0.85rem 2.25rem calc(0.85rem + env(safe-area-inset-bottom, 0px));
+    display: flex; align-items: center; justify-content: flex-start;
+    gap: 1rem;
+    border-top: 1px solid var(--q-border);
+    background: white;
+  }
+  /* Pull the divider closer to the Retake/Add To My Bundle buttons on the
+     result screen specifically. */
+  #resultOverlay .eq-modal-foot {
+    padding-top: 0.3rem;
+  }
+
+  .eq-modal-eyebrow {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+    font-weight: 600; color: var(--q-green); margin: 1.25rem 0 0.6rem;
+  }
+  .eq-modal-question {
+    font-family: var(--q-font-serif); font-weight: 600;
+    font-size: 1.55rem; line-height: 1.25; color: var(--q-green);
+    margin: 0 0 1.5rem;
+  }
+
+  /* ── Question-to-question transition ── */
+  #questionWrap {
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  #questionWrap.is-fading {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  /* ── Completion success state ── */
+  .eq-quiz-success {
+    display: none;
+    position: absolute; inset: 0;
+    background: white;
+    border-radius: inherit;
+    align-items: center; justify-content: center;
+    z-index: 5;
+  }
+  .eq-quiz-success.is-active { display: flex; }
+
+  .eq-success-check {
+    position: relative;
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    background: var(--q-green);
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  .eq-quiz-success.is-active .eq-success-check {
+    animation: successCircle 0.5s cubic-bezier(.34,1.56,.64,1) 0.15s forwards;
+  }
+  @keyframes successCircle {
+    0%   { opacity: 0; transform: scale(0.6); }
+    70%  { opacity: 1; transform: scale(1.06); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Checkmark: two solid bars that grow via scaleX — no border/width animation involved */
+  .eq-tick-short, .eq-tick-long {
+    position: absolute;
+    overflow: hidden;
+  }
+  /* Geometry (84px circle, centre 42,42): short leg runs (24,42)→(36,54),
+     long leg runs (36,54)→(60,30). The long bar starts 2px behind the elbow
+     so the two strokes overlap and the joint reads as solid, not notched. */
+  .eq-tick-short { left: 24px;   top: 39px;   width: 17px; height: 6px; transform: rotate(45deg);  transform-origin: left center; }
+  .eq-tick-long  { left: 34.6px; top: 52.4px; width: 36px; height: 6px; transform: rotate(-45deg); transform-origin: left center; }
+
+  .eq-tick-short__bar, .eq-tick-long__bar {
+    position: absolute;
+    inset: 0;
+    background: white;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  /* Round only each bar's outer tip; the end at the joint stays square so no
+     second rounded cap competes with the joint dot below. */
+  .eq-tick-short__bar { border-radius: 3px 0 0 3px; }
+  .eq-tick-long__bar  { border-radius: 0 3px 3px 0; }
+  .eq-quiz-success.is-active .eq-tick-short__bar {
+    animation: tickGrow 0.18s ease-out 0.35s forwards;
+  }
+  .eq-quiz-success.is-active .eq-tick-long__bar {
+    animation: tickGrow 0.28s ease-out 0.5s forwards;
+  }
+
+  /* Small round plug exactly on the elbow (36,54) — the two pill-capped bars'
+     rounded ends overlap into a lumpy blob without this; the dot unifies them
+     into one clean rounded corner. */
+  .eq-tick-joint {
+    position: absolute;
+    left: 33px; top: 51px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+  }
+  .eq-quiz-success.is-active .eq-tick-joint {
+    animation: jointIn 0.1s linear 0.5s forwards;
+  }
+  @keyframes jointIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes tickGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* ── Quiz option rows ── */
+  .quiz-opt-list { position: relative; z-index: 1; }
+  .quiz-opt {
+    position: relative;
+    z-index: 1;
+    width: 100%; text-align: left;
+    display: flex; align-items: center;
+    padding: 15px 18px; margin-bottom: 10px;
+    border-radius: var(--q-radius-sm);
+    border: 1.5px solid transparent; background: transparent; color: var(--q-ink);
+    font-family: var(--q-font-sans); font-size: 0.92rem; font-weight: 500;
+    cursor: pointer; pointer-events: auto;
+    transition: border-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .quiz-opt:last-child { margin-bottom: 0.25rem; }
+  .quiz-opt.is-eq-selected { border-color: var(--q-green); color: var(--q-green); }
+
+  /* ── Lead form ── */
+  .lead-copy-heading {
+    font-family: var(--q-font-serif); font-weight: 600;
+    font-size: clamp(1.9rem, 3vw, 2.35rem); color: var(--q-green);
+    line-height: 1.1; margin: 0 0 0.6rem;
+  }
+  .lead-copy-sub {
+    font-size: 0.9rem; color: var(--q-body); line-height: 1.6;
+    margin: 0 0 1.1rem;
+  }
+  .lead-row { display: flex; gap: 12px; }
+  .lead-input {
+    font-family: var(--q-font-sans); font-size: 16px; color: var(--q-ink);
+    background: white; padding: 14px 20px; border-radius: var(--q-radius-pill);
+    border: 1.5px solid #d8d4c8; outline: none; width: 100%;
+    transition: border-color 0.2s;
+  }
+  .lead-input:focus { border-color: var(--q-green); }
+  .lead-consent {
+    display: flex; align-items: flex-start; gap: 10px; text-align: left;
+    padding: 2px 4px 4px;
+  }
+  .lead-consent input { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; accent-color: var(--q-green); }
+  .lead-consent label { font-size: 0.7rem; color: var(--q-muted); line-height: 1.6; }
+
+  .lead-skip-link {
+    background: none; border: none; padding: 4px;
+    color: var(--q-muted); font-family: var(--q-font-sans);
+    font-size: 0.78rem; font-weight: 500; text-decoration: underline;
+    text-underline-offset: 2px; cursor: pointer; align-self: center;
+  }
+  .lead-skip-link:hover { color: var(--q-body); }
+
+  /* ── Lead overlay decorative images ── */
+  .lead-deco {
+    position: absolute; pointer-events: none; z-index: 1;
+    width: var(--w); height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+    top: var(--t); left: var(--l); right: var(--r); bottom: var(--b);
+    border-radius: 1rem; box-shadow: var(--q-shadow-img);
+    transform: rotate(var(--rot));
+  }
+
+  /* ── Result overlay ── */
+  .result-label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em;
+    font-weight: 600; color: var(--q-green); margin: 1.75rem 0 1.1rem;
+  }
+  .result-row { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 0.5rem; }
+  .result-img {
+    height: 130px; width: auto; object-fit: contain; border-radius: 12px;
+    box-shadow: var(--q-shadow-img); flex-shrink: 0; background: var(--q-bg);
+  }
+  .result-name { font-family: var(--q-font-serif); font-weight: 600; font-size: 1.6rem; color: var(--q-green); line-height: 1.2; margin: 0 0 0.35rem; }
+  .result-price { display: flex; align-items: baseline; gap: 0.3rem; margin: 0 0 0.6rem; }
+  .result-price-amount { font-size: 1.5rem; font-weight: 700; color: var(--q-green); line-height: 1; }
+  .result-price-currency { font-size: 0.72rem; font-weight: 500; color: var(--q-body); text-transform: uppercase; letter-spacing: 0.06em; }
+  .result-tagline { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--q-green); margin: 0 0 0.75rem; font-weight: 600; }
+  .result-desc { font-size: 0.875rem; color: var(--q-body); line-height: 1.7; margin: 0; }
+  .result-actions { display: flex; flex-wrap: nowrap; justify-content: flex-end; gap: 12px; margin-top: 1.5rem; width: 100%; }
+  /* Explicitly lock width/display/flex here — the theme's own site-wide CSS may set
+     `button, a { width: 100% }` or similar under a mobile breakpoint, and since .eq-btn
+     never sets `width` at all, that theme rule would otherwise apply unopposed. */
+  .result-actions .eq-btn {
+    display: inline-flex !important;
+    width: auto !important;
+    flex: 0 1 auto !important;
+  }
+
+  /* ════════════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════════════ */
+
+  @media (min-width: 1400px) {
+    .quiz-left-panel { width: 46%; }
+    .quiz-right-panel { width: 54%; }
+  }
+
+  @media (max-width: 1023px) and (min-width: 769px) {
+    .quiz-right-inner { padding: 2.5rem; }
+    .product-img { width: clamp(130px, var(--w), 180px); }
+  }
+
+  @media (max-width: 768px) {
+    .quiz-page-wrap { flex-direction: column; min-height: auto; overflow: visible; }
+    .quiz-left-panel { display: none; }
+    .quiz-right-panel { width: 100%; }
+    .quiz-right-inner {
+      padding: 2.75rem 1.5rem 3.5rem;
+      max-width: 100%;
+      justify-content: flex-start;
+    }
+
+    .mobile-hero-strip {
+      display: flex;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+    }
+    .mobile-hero-strip img {
+      width: 20vw; max-width: 88px; height: auto; aspect-ratio: 4 / 5;
+      object-fit: cover; border-radius: 0.85rem;
+      box-shadow: var(--q-shadow-img);
+    }
+    .mobile-hero-strip img:nth-child(2),
+    .mobile-hero-strip img:nth-child(4) { transform: translateY(-10px); }
+
+    .hero-heading { text-align: center; }
+    .hero-sub { max-width: 100%; text-align: center; margin-left: auto; margin-right: auto; }
+    .hero-footnote { justify-content: center; }
+    .eyebrow { display: none; }
+
+    .slide-up.center-cta { display: flex; justify-content: center; }
+    .eq-btn--lg { width: 100%; max-width: 320px; }
+
+    .euphoriel-overlay { padding: 0; align-items: flex-end; }
+    .eq-modal-card { border-radius: 1.5rem 1.5rem 0 0; max-height: 92svh; }
+    .eq-modal-card--quiz, .eq-modal-card--lead, .eq-modal-card--result { max-width: none; }
+    .eq-modal-head { padding: 1.75rem 1.5rem 0; }
+    .eq-modal-body { padding: 0 1.5rem; }
+    .eq-modal-foot { padding: 1.1rem 1.5rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); }
+
+    .lead-row { flex-direction: column; }
+    .result-row { flex-direction: column; align-items: center; text-align: center; }
+    .result-price { justify-content: center; }
+    .result-img { height: 150px; }
+  }
+
+  @media (max-width: 380px) {
+    .quiz-right-inner { padding: 2.25rem 1.1rem 3rem; }
+    .eq-modal-head { padding: 1.5rem 1.15rem 0; }
+    .eq-modal-body { padding: 0 1.15rem; }
+    .eq-modal-foot { padding: 1rem 1.15rem calc(1.25rem + env(safe-area-inset-bottom, 0px)); }
+    .result-actions { gap: 8px; }
+    .result-actions .eq-btn { padding-left: 1.25rem !important; padding-right: 1.25rem !important; font-size: 0.78rem !important; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quiz-page-wrap *, .euphoriel-overlay * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% comment %} ════════════════════════════════════════
+  MAIN TWO-COLUMN LAYOUT
+════════════════════════════════════════ {% endcomment %}
+<div class="quiz-page-wrap section-{{ section.id }}-padding">
+
+  {% comment %} ── LEFT PANEL: floating product collage (desktop/tablet) ── {% endcomment %}
+  <div class="quiz-left-panel">
+    <div class="quiz-left-panel__glow"></div>
+    <div class="quiz-left-panel__grain"></div>
+    <div class="quiz-left-panel__stage">
+      <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125"
+           width="800" height="1000" alt="Balance Elixir Face Oil" class="product-img img-1">
+      <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215"
+           width="800" height="1000" alt="Harmonic Elixir Face Oil" class="product-img img-2">
+      <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401"
+           width="800" height="1000" alt="Timeless Elixir Face Oil" class="product-img img-4">
+      <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141"
+           width="800" height="1000" alt="Renewal Elixir Face Oil" class="product-img img-6">
+    </div>
+  </div>
+
+  {% comment %} ── RIGHT PANEL: headline + CTA ── {% endcomment %}
+  <div class="quiz-right-panel">
+    <div class="quiz-right-inner">
+
+      {% comment %} Compact hero visual — mobile only {% endcomment %}
+      <div class="mobile-hero-strip">
+        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" width="800" height="1000" alt="Balance Elixir Face Oil">
+        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" width="800" height="1000" alt="Harmonic Elixir Face Oil">
+        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" width="800" height="1000" alt="Renewal Elixir Face Oil">
+        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" width="800" height="1000" alt="Timeless Elixir Face Oil">
+      </div>
+
+      <span class="eyebrow slide-up">The Skin Quiz</span>
+
+      <h1 class="hero-heading slide-up delay-1">
+        Find My Perfect<br><em>Glow Formula</em>
+      </h1>
+
+      <p class="hero-sub slide-up delay-2">
+        Answer 4 quick questions and we'll match you to the right face oil for your skin.
+      </p>
+
+      <div class="slide-up delay-3 center-cta">
+        <button id="startQuizBtn" class="eq-btn eq-btn--primary eq-btn--lg">Start Quiz</button>
+      </div>
+
+      <p class="hero-footnote slide-up delay-4">
+        4 questions <span class="dot">&bull;</span> About 1 minute
+      </p>
+    </div>
+  </div>
+</div>
+
+{% comment %} ════════════════════════════════════════
+  QUIZ MODAL OVERLAY
+════════════════════════════════════════ {% endcomment %}
+<div id="quizOverlay" class="euphoriel-overlay">
+  <div class="overlay-scrim" style="background:rgba(38,36,31,0.35); backdrop-filter:blur(6px);"></div>
+  <div class="eq-modal-card eq-modal-card--quiz">
+    <button id="prevBtn" class="eq-icon-close eq-icon-back" data-hidden="true" aria-label="Back">&larr;</button>
+    <button id="closeQuiz" class="eq-icon-close" aria-label="Close">&times;</button>
+
+    <div class="eq-modal-head"></div>
+
+    <div class="eq-modal-body" id="questionWrap"></div>
+
+    <div class="eq-quiz-success" id="quizSuccess">
+      <div class="eq-success-check">
+        <div class="eq-tick-short"><div class="eq-tick-short__bar"></div></div>
+        <div class="eq-tick-long"><div class="eq-tick-long__bar"></div></div>
+        <div class="eq-tick-joint"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} ════════════════════════════════════════
+  LEAD CAPTURE OVERLAY
+════════════════════════════════════════ {% endcomment %}
+<div id="leadOverlay" class="euphoriel-overlay">
+  <div class="overlay-scrim" style="background:var(--q-bg, #F5F1E8);"></div>
+
+  {% comment %} Decorative product images — edges. Hidden until this overlay opens, so lazy-load them. {% endcomment %}
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:12vw; --t:2%; --l:-5%; --rot:-22deg;">
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:13vw; --t:36%; --l:-6%; --rot:12deg;">
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:11vw; --b:3%; --l:1%; --rot:-16deg;">
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:10vw; --t:2%; --r:-3%; --rot:20deg;">
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-02.png?v=1750204077" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:10vw; --t:37%; --r:-3%; --rot:-14deg;">
+  <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt=""
+       width="800" height="1000" loading="lazy" class="lead-deco" style="--w:12vw; --b:3%; --r:2%; --rot:9deg;">
+
+  <div class="eq-modal-card eq-modal-card--lead" style="box-shadow:none; border:none; background:transparent;">
+    <div class="eq-modal-body" style="padding:0 1rem; text-align:center; overflow-y:hidden;">
+      <h2 class="lead-copy-heading">Almost there!</h2>
+      <p class="lead-copy-sub">
+        Enter your info to get your results. You'll also get early access to new products and exclusive offers.
+      </p>
+
+      <form id="leadForm" style="display:flex; flex-direction:column; gap:10px; text-align:left;">
+        <div class="lead-row">
+          <input type="text" id="leadFirst" placeholder="First Name" class="lead-input">
+          <input type="text" id="leadLast" placeholder="Last Name" class="lead-input">
+        </div>
+        <input type="email" id="leadEmail" placeholder="Email" class="lead-input" required>
+
+        <div class="lead-consent">
+          <input type="checkbox" id="leadConsent">
+          <label for="leadConsent">
+            Optional: check this box to also receive marketing emails from Euphoriel. Not required to get your results — unsubscribe anytime.
+          </label>
+        </div>
+
+        <button type="submit" class="eq-btn eq-btn--primary eq-btn--md eq-btn--block">Get My Results</button>
+        <button type="button" id="skipLeadBtn" class="lead-skip-link">Skip this step</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% comment %} ════════════════════════════════════════
+  RESULT OVERLAY
+════════════════════════════════════════ {% endcomment %}
+<div id="resultOverlay" class="euphoriel-overlay">
+  <div class="overlay-scrim" style="background:rgba(38,36,31,0.35); backdrop-filter:blur(6px);"></div>
+  <div class="eq-modal-card eq-modal-card--result">
+    <button id="closeResult" class="eq-icon-close" aria-label="Close">&times;</button>
+
+    <div class="eq-modal-head">
+      <p class="result-label">Your Match</p>
+    </div>
+
+    <div class="eq-modal-body">
+      <div class="result-row">
+        <!-- src is set dynamically in JS via resultImg.src = p.img -->
+        <img id="resultImg" width="800" height="1000" class="result-img" alt="Your matched product" loading="lazy">
+        <div>
+          <h2 id="resultName" class="result-name"></h2>
+          <p id="resultPrice" class="result-price"></p>
+          <p id="resultTagline" class="result-tagline"></p>
+          <p id="resultDesc" class="result-desc"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="eq-modal-foot">
+      <div class="result-actions">
+        <button id="retakeBtn" class="eq-btn eq-btn--ghost eq-btn--md">Retake</button>
+        <a id="bundleBtn" href="/pages/about?view=build-your-bundle" class="eq-btn eq-btn--primary eq-btn--md">Add To My Bundle</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} ════════════════════════════════════════
+  QUIZ JAVASCRIPT
+════════════════════════════════════════ {% endcomment %}
+<script>
+(function() {
+
+  // ── Quiz questions & scoring ──
+  const questions = [
+    {
+      q: "How would you describe your skin type?",
+      options: [
+        { label: "Oily, shiny, or breakout-prone",                 scores: { balance: 3 } },
+        { label: "Combination — oily in some areas, dry in others", scores: { harmonic: 3 } },
+        { label: "Dry, tight, or dehydrated",                      scores: { renewal: 3 } },
+        { label: "Mature, with fine lines or loss of firmness",    scores: { timeless: 3 } },
+      ]
+    },
+    {
+      q: "What's your biggest skin concern right now?",
+      options: [
+        { label: "Clogged pores, blackheads, or breakouts",       scores: { balance: 3 } },
+        { label: "Uneven texture or dullness",                    scores: { harmonic: 2, renewal: 1 } },
+        { label: "Fine lines or loss of firmness",                scores: { timeless: 3 } },
+        { label: "Redness, tightness, or stripped-feeling skin",  scores: { renewal: 3 } },
+      ]
+    },
+    {
+      q: "Right after cleansing, how does your skin feel?",
+      options: [
+        { label: "Oily again within an hour",                     scores: { balance: 3 } },
+        { label: "Tight in some spots, oily in others",           scores: { harmonic: 3 } },
+        { label: "Comfortable, just needs more moisture",         scores: { renewal: 3 } },
+        { label: "Tight, dry, or irritated",                      scores: { renewal: 3 } },
+      ]
+    },
+    {
+      q: "What's the #1 result you want from your skincare routine?",
+      options: [
+        { label: "Clearer skin and less shine",                   scores: { balance: 3 } },
+        { label: "Balance — calm oily zones, hydrate dry zones",  scores: { harmonic: 3 } },
+        { label: "Firmer, smoother, more youthful-looking skin",  scores: { timeless: 3 } },
+        { label: "Calm, soothe, and protect sensitive skin",      scores: { renewal: 3 } },
+      ]
+    },
+  ];
+
+  // ── Product data ──
+  const products = {
+    balance: {
+      name:    "Balance Elixir",
+      tagline: "Oily and blemish-prone skin",
+      desc:    "Regulates oil, clears pores, and calms your skin without drying it out. Lightweight and fast-absorbing with jojoba, tamanu, and sea buckthorn.",
+      price:   "$39.99 CAD",
+      img:     "https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125",
+      handle:  "balance-elixir-face-oil",
+    },
+    harmonic: {
+      name:    "Harmonic Elixir",
+      tagline: "Combination skin",
+      desc:    "Hydrates where you need it, regulates where you don't. Works on both the oily zones and dry patches at the same time without clogging pores.",
+      price:   "$39.99 CAD",
+      img:     "https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215",
+      handle:  "harmonic-elixir-face-oil",
+    },
+    renewal: {
+      name:    "Renewal Elixir",
+      tagline: "Normal to dry skin",
+      desc:    "Deep hydration without feeling heavy. Rosehip, marula, and vitamin C replenish moisture, even skin tone, and bring back the glow.",
+      price:   "$39.99 CAD",
+      img:     "https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141",
+      handle:  "renewal-elixir-face-oil",
+    },
+    timeless: {
+      name:    "Timeless Elixir",
+      tagline: "Mature and aging skin",
+      desc:    "Firms, smooths, and nourishes skin that has lost some elasticity. Coenzyme Q10, camellia, and vitamin C visibly soften fine lines over time.",
+      price:   "$39.99 CAD",
+      img:     "https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401",
+      handle:  "timeless-elixir-face-oil",
+    },
+  };
+
+  // ── State ──
+  let step = 0;
+  let answers = [];
+  let matchedKey = null;
+
+  // ── DOM refs ──
+  const quizOverlay   = document.getElementById('quizOverlay');
+  const leadOverlay   = document.getElementById('leadOverlay');
+  const resultOverlay = document.getElementById('resultOverlay');
+  const questionWrap  = document.getElementById('questionWrap');
+  const quizSuccess   = document.getElementById('quizSuccess');
+  const prevBtn       = document.getElementById('prevBtn');
+
+  // ── Overlay helpers ──
+  // Safari (iOS) rubber-bands / zooms the page behind a fixed overlay unless the
+  // body itself is locked in place — toggling position:fixed with the saved
+  // scroll offset is the standard fix.
+  let lockedScrollY = 0;
+  let openOverlayCount = 0;
+  function lockBodyScroll() {
+    if (openOverlayCount === 0) {
+      lockedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+    openOverlayCount++;
+  }
+  function unlockBodyScroll() {
+    openOverlayCount = Math.max(0, openOverlayCount - 1);
+    if (openOverlayCount === 0) {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, lockedScrollY);
+    }
+  }
+  function showOverlay(el)  { el.classList.add('is-open'); lockBodyScroll(); }
+  function hideOverlay(el)  { if (el.classList.contains('is-open')) { el.classList.remove('is-open'); unlockBodyScroll(); } }
+  function hideAll()        { [quizOverlay, leadOverlay, resultOverlay].forEach(hideOverlay); }
+
+  // ── Render question ──
+  function renderQuestion() {
+    const q     = questions[step];
+    const saved = answers[step];
+    prevBtn.dataset.hidden  = step === 0 ? 'true' : 'false';
+
+    questionWrap.innerHTML = `
+      <p class="eq-modal-eyebrow">Question ${step + 1} of ${questions.length}</p>
+      <h2 class="eq-modal-question">${q.q}</h2>
+      <div class="quiz-opt-list">
+        ${q.options.map((o, i) => `
+          <button type="button" class="quiz-opt${saved && saved.idx === i ? ' is-eq-selected' : ''}" data-idx="${i}">
+            <span>${o.label}</span>
+          </button>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  // Event delegation — survives re-renders and avoids CSP/inline-handler issues
+  questionWrap.addEventListener('click', function(e) {
+    const btn = e.target.closest('.quiz-opt');
+    if (!btn || !questionWrap.contains(btn)) return;
+    e.preventDefault();
+    selectOption(parseInt(btn.dataset.idx, 10));
+  });
+
+  // ── Select option ──
+  function selectOption(idx) {
+    answers[step] = { scores: questions[step].options[idx].scores, idx };
+    questionWrap.querySelectorAll('.quiz-opt').forEach((b, i) => {
+      b.classList.toggle('is-eq-selected', i === idx);
+    });
+
+    setTimeout(() => {
+      if (step < questions.length - 1) {
+        goToNextQuestion();
+      } else {
+        showCompletion();
+      }
+    }, 350);
+  }
+
+  // ── Fade out current question, render next, fade back in ──
+  function goToNextQuestion() {
+    questionWrap.classList.add('is-fading');
+    setTimeout(() => {
+      step++;
+      renderQuestion();
+      void questionWrap.offsetWidth; // force reflow so the fade-in transition runs
+      questionWrap.classList.remove('is-fading');
+    }, 220);
+  }
+
+  // ── Completion sequence: fade question out, pause, draw success check, then continue ──
+  function showCompletion() {
+    questionWrap.classList.add('is-fading');
+    setTimeout(() => {
+      quizSuccess.classList.add('is-active');
+      const parts = [
+        quizSuccess.querySelector('.eq-success-check'),
+        quizSuccess.querySelector('.eq-tick-short__bar'),
+        quizSuccess.querySelector('.eq-tick-long__bar'),
+      ];
+
+      // Wait for ALL THREE animations to genuinely finish (whichever runs longest),
+      // so tweaking any one duration can never cut the others off mid-play.
+      let finished = 0;
+      function onAnimDone(e) {
+        if (!parts.includes(e.target)) return;
+        finished++;
+        if (finished < parts.length) return;
+        parts.forEach(p => p.removeEventListener('animationend', onAnimDone));
+        // Brief pause so the finished checkmark is actually seen before advancing
+        setTimeout(() => {
+          computeMatch();
+          hideOverlay(quizOverlay);
+          showOverlay(leadOverlay);
+          questionWrap.classList.remove('is-fading');
+          quizSuccess.classList.remove('is-active');
+        }, 450);
+      }
+      parts.forEach(p => p.addEventListener('animationend', onAnimDone));
+    }, 220);
+  }
+
+  // ── Compute result ──
+  function computeMatch() {
+    const totals = { balance: 0, harmonic: 0, renewal: 0, timeless: 0 };
+    answers.forEach(a => {
+      if (!a) return;
+      Object.entries(a.scores).forEach(([k, v]) => { if (k in totals) totals[k] += v; });
+    });
+    matchedKey = Object.entries(totals).sort((a, b) => b[1] - a[1])[0][0];
+  }
+
+  // ── Render result ──
+  function renderResult() {
+    const p = products[matchedKey];
+    document.getElementById('resultImg').src             = p.img;
+    document.getElementById('resultName').textContent    = p.name;
+    document.getElementById('resultTagline').textContent = p.tagline;
+    document.getElementById('resultDesc').textContent    = p.desc;
+
+    // Split "$39.99 CAD" into a bold amount + a smaller, lighter currency label
+    const [, amount, currency] = p.price.match(/^(\S+)\s*(.*)$/);
+    const priceEl = document.getElementById('resultPrice');
+    priceEl.replaceChildren();
+    const amountSpan = document.createElement('span');
+    amountSpan.className = 'result-price-amount';
+    amountSpan.textContent = amount;
+    priceEl.appendChild(amountSpan);
+    if (currency) {
+      const currencySpan = document.createElement('span');
+      currencySpan.className = 'result-price-currency';
+      currencySpan.textContent = currency;
+      priceEl.appendChild(currencySpan);
+    }
+
+    // Set bundle button URL with face param
+    const bundleBtn = document.getElementById('bundleBtn');
+    bundleBtn.href = '/pages/about?view=build-your-bundle&face=' + matchedKey;
+
+    hideAll();
+    showOverlay(resultOverlay);
+  }
+
+  // ── Klaviyo lead submission ──
+  async function submitToKlaviyo(first, last, email) {
+    const KLAVIYO_PUBLIC_KEY = 'WVZPTu';
+    const KLAVIYO_LIST_ID    = 'YswWdg';
+
+    const payload = {
+      data: {
+        type: 'subscription',
+        attributes: {
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                first_name:  first,
+                last_name:   last,
+                email:       email,
+                properties: {
+                  skin_quiz_result: matchedKey,
+                }
+              }
+            }
+          },
+          list_id: KLAVIYO_LIST_ID,
+        }
+      }
+    };
+
+    try {
+      await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_PUBLIC_KEY}`, {
+        method:  'POST',
+        headers: { 'content-type': 'application/json', 'revision': '2023-12-15' },
+        body:    JSON.stringify(payload),
+      });
+    } catch (err) {
+      console.warn('Klaviyo submission failed:', err);
+      // Non-blocking — still show result even if Klaviyo fails
+    }
+  }
+
+  // Note: the matched product is intentionally NOT added to the bundle here.
+  // bundle-page.liquid reads the `?face=` param on its own arrival and adds the
+  // correct product (with a real variant ID) via its own button's dataset —
+  // adding it here too caused the same item to be added twice under mismatched
+  // names, and this copy never had a variantId the real cart-add flow needs.
+
+  // ── Event listeners ──
+  document.getElementById('startQuizBtn').addEventListener('click', function() {
+    step = 0; answers = [];
+    showOverlay(quizOverlay);
+    renderQuestion();
+  });
+
+  prevBtn.addEventListener('click', function() {
+    if (step > 0) { step--; renderQuestion(); }
+  });
+
+  document.getElementById('closeQuiz').addEventListener('click', function() {
+    hideOverlay(quizOverlay);
+  });
+
+  document.getElementById('closeResult').addEventListener('click', function() {
+    hideOverlay(resultOverlay);
+  });
+
+  document.getElementById('retakeBtn').addEventListener('click', function() {
+    step = 0; answers = [];
+    hideAll();
+    showOverlay(quizOverlay);
+    renderQuestion();
+  });
+
+  document.getElementById('skipLeadBtn').addEventListener('click', renderResult);
+
+  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const first = document.getElementById('leadFirst').value.trim();
+    const last  = document.getElementById('leadLast').value.trim();
+    const email = document.getElementById('leadEmail').value.trim();
+    await submitToKlaviyo(first, last, email);
+    renderResult();
+  });
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Quiz Page",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    { "name": "Quiz Page" }
+  ]
+}
+{% endschema %}

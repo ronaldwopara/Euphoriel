@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euphoriel - Nav</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { margin: 0; }
+    </style>
+</head>
+<body class="bg-white pb-20 md:pb-24">
+
+    <!-- Announcement Bar --><div class="w-full bg-[#C5DBC3]">
+        <div class="h-[38px] flex items-center justify-center px-4">
+            <p class="text-[13px] text-[#1F4C35] tracking-wide text-center" style="font-family:'DM Sans', sans-serif;">
+                10% Off at Checkout &bull; Free Shipping Canada-Wide $75+
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Navigation --><header class="w-full bg-white">
+        <nav class="grid grid-cols-3 items-center px-8 md:px-16 h-[66px]" style="font-family:'DM Sans', sans-serif;">
+
+            <!-- Left Links --><div class="hidden md:flex items-center gap-10 justify-self-start">
+                <a href="#" class="text-[13px] uppercase tracking-wide text-[#1F4C35] hover:opacity-70 transition-opacity">Shop</a>
+                <a href="#" class="text-[13px] uppercase tracking-wide text-[#1F4C35] hover:opacity-70 transition-opacity">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Icon (Hamburger) --><div class="md:hidden justify-self-start">
+                <button class="text-[#1F4C35] p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+
+            <!-- Logo --><div class="justify-self-center">
+                <a href="#">
+                    <img src="logo_green.svg" alt="Euphoriel" class="h-12 w-auto">
+                </a>
+            </div>
+
+            <!-- Right Links --><div class="flex items-center gap-10 justify-self-end">
+                <a href="quiz.html" class="text-[13px] uppercase tracking-wide text-[#1F4C35] hover:opacity-70 transition-opacity">Face Quiz</a>
+                <a href="#" class="text-[13px] uppercase tracking-wide text-[#1F4C35] hover:opacity-70 transition-opacity">Search</a>
+                <a href="#" class="text-[13px] uppercase tracking-wide text-[#1F4C35] hover:opacity-70 transition-opacity">Cart</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section --><section class="relative w-full bg-[#F2EFE6] overflow-hidden">
+        <div class="relative w-full px-6 md:px-12 py-10 md:py-14 lg:py-16 md:min-h-[560px] lg:min-h-[740px]">
+
+            <!-- Expanded card: spans the full content width, sits behind the text, image stays pinned at its original size on the right -->
+            <div class="hidden md:block absolute inset-y-0 left-6 md:left-12 right-6 md:right-12 overflow-hidden ring-1 ring-[#1F4C35]/10 shadow-[0_25px_50px_-20px_rgba(31,76,53,0.35)]" aria-hidden="true">
+                <img src="https://res.cloudinary.com/s1km9nr7/image/upload/v1785638583/euphoriel/3_Step_Glow_Routine_Products.avif" alt="" class="absolute right-0 top-1/2 -translate-y-1/2 md:w-[540px] lg:w-[720px] aspect-square object-contain" style="filter: sepia(10%) saturate(118%) brightness(103%) contrast(101%);">
+
+                <!-- Vignette to soften the flat "sticker" edges -->
+                <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 75% 45%, rgba(0,0,0,0) 45%, rgba(35,25,10,0.16) 100%);"></div>
+
+                <!-- Warm blend layer to unify badge/photo color temperature -->
+                <div class="absolute inset-0 pointer-events-none mix-blend-multiply" style="background: linear-gradient(135deg, rgba(214,178,120,0.12), rgba(196,146,86,0.05));"></div>
+            </div>
+
+            <div class="relative z-10 w-full flex flex-col md:flex-row items-center gap-8 md:gap-2 justify-between">
+                <div class="w-full max-w-[760px] md:ml-[55px]" style="font-family:'DM Sans', sans-serif;">
+                    <h1 class="text-[#1F4C35] leading-[1.1] font-light text-5xl md:text-7xl lg:text-8xl" style="font-family:'Cormorant Garamond', serif;">
+                        Build Your<br>Own Bundle
+                    </h1>
+                    <p class="mt-3 text-[#1F4C35] text-xl md:text-2xl lg:text-3xl leading-relaxed">
+                        Choose 2+ products to<br>unlock <span class="font-bold">15% off</span>.
+                    </p>
+                </div>
+
+                <!-- Mobile-only photo card (desktop uses the absolutely positioned version above) -->
+                <div class="md:hidden relative w-full max-w-[420px] flex-shrink-0">
+                    <div class="relative aspect-square overflow-hidden ring-1 ring-[#1F4C35]/10 shadow-[0_25px_50px_-20px_rgba(31,76,53,0.35)]">
+                        <img src="https://res.cloudinary.com/s1km9nr7/image/upload/v1785638583/euphoriel/3_Step_Glow_Routine_Products.avif" alt="" class="w-full h-full object-contain" style="filter: sepia(10%) saturate(118%) brightness(103%) contrast(101%);">
+                        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 55%, rgba(35,25,10,0.16) 100%);"></div>
+                        <div class="absolute inset-0 pointer-events-none mix-blend-multiply" style="background: linear-gradient(135deg, rgba(214,178,120,0.12), rgba(196,146,86,0.05));"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Soft seam into the step section below -->
+        <div class="relative z-10 w-full h-8 md:h-12 bg-gradient-to-b from-[#F2EFE6] to-white" aria-hidden="true"></div>
+    </section>
+
+    <!-- ===================== STEP 1: CLEANSE ===================== -->
+    <section id="step-cleanse" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636615/euphoriel/cleanse.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase tracking-[0.3em] mb-2" style="font-family:'DM Sans', sans-serif; font-weight:800;">Step 1</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-light" style="font-family:'Cormorant Garamond', serif;">Cleanse</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Radiance_Ritual_Shower_Oil-01.png.webp" alt="Radiance Ritual Shower Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(96)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Radiance Ritual Shower Oil</h3>
+                        <p class="hidden">$34.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Cleanses And Conditions In One Step</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Radiance Ritual Shower Oil" data-img="Radiance_Ritual_Shower_Oil-01.png.webp" data-price="$34.99 CAD">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STEP 2: MOISTURIZE ===================== -->
+    <section id="step-moisturize" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636616/euphoriel/moisture.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase tracking-[0.3em] mb-2" style="font-family:'DM Sans', sans-serif; font-weight:800;">Step 2</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-light" style="font-family:'Cormorant Garamond', serif;">Moisturize</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Shea_Body_Butter.png" alt="Rejuvenating Shea Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(68)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Rejuvenating Shea Body Butter</h3>
+                        <p class="hidden">$29.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Very Dry, Rough Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Rejuvenating Shea Body Butter" data-img="Shea_Body_Butter.png" data-price="$29.99 CAD">Add to Bundle</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Mango_Body_Butter.png" alt="Revitalizing Mango Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(102)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Revitalizing Mango Body Butter</h3>
+                        <p class="hidden">$29.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Normal To Dry Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Revitalizing Mango Body Butter" data-img="Mango_Body_Butter.png" data-price="$29.99 CAD">Add to Bundle</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Golden_Aura_Body_Oil.png" alt="Golden Aura Body Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(85)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Golden Aura Body Oil</h3>
+                        <p class="hidden">$31.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Dry, Sensitive Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Golden Aura Body Oil" data-img="Golden_Aura_Body_Oil.png" data-price="$31.99 CAD">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== STEP 3: NOURISH ===================== -->
+    <section id="step-nourish" class="w-full">
+        <!-- Banner -->
+        <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636618/euphoriel/nourish.png');">
+            <p class="text-[#1F4C35] text-sm md:text-base uppercase tracking-[0.3em] mb-2" style="font-family:'DM Sans', sans-serif; font-weight:800;">Step 3</p>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-light" style="font-family:'Cormorant Garamond', serif;">Nourish</h2>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="px-4 sm:px-6 md:px-20 lg:px-28 py-8 md:py-16">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+
+                <!-- Product 1 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Copy_of_Renewal_Elixir_Face_Oil-01.png.webp" alt="Renewal Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(123)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Renewal Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Deep Hydration, Visible Glow</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Renewal Elixir Face Oil" data-img="Copy_of_Renewal_Elixir_Face_Oil-01.png.webp" data-price="$39.99 CAD" data-face-key="renewal">Add to Bundle</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Copy_of_Balance_Elixir_Face_Oil-01.png.webp" alt="Balance Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(107)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Balance Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Oily, Blemish-Prone Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Balance Elixir Face Oil" data-img="Copy_of_Balance_Elixir_Face_Oil-01.png.webp" data-price="$39.99 CAD" data-face-key="balance">Add to Bundle</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp" alt="Harmonic Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(90)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Harmonic Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Combination Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Harmonic Elixir Face Oil" data-img="Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp" data-price="$39.99 CAD" data-face-key="harmonic">Add to Bundle</button>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="flex flex-col h-full">
+                    <div class="overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
+                        <img src="Copy_of_Timeless_Elixir_Face_Oil-01.webp" alt="Timeless Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="text-[#1F4C35] text-sm">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-gray-500 text-sm">(64)</span>
+                    </div>
+                    <div class="mb-1">
+                        <h3 class="text-sm md:text-lg text-[#1F4C35] font-extrabold" style="font-family:'DM Sans', sans-serif;">Timeless Elixir Face Oil</h3>
+                        <p class="hidden">$39.99 CAD</p>
+                    </div>
+                    <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Mature, Aging Skin</p>
+                    <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-bold tracking-wider hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif;" data-name="Timeless Elixir Face Oil" data-img="Copy_of_Timeless_Elixir_Face_Oil-01.webp" data-price="$39.99 CAD" data-face-key="timeless">Add to Bundle</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="w-full bg-white px-6 md:px-12 lg:px-16 py-10 md:py-14">
+        <div class="mx-auto grid max-w-[1320px] grid-cols-1 items-stretch gap-6 lg:grid-cols-[1.65fr_1fr] lg:gap-8">
+
+            <!-- Left: Logo + Nav -->
+            <div class="flex flex-col gap-5 md:gap-6">
+                <a href="#" class="inline-block self-start">
+                    <img src="logo_green.svg" alt="Euphoriel" class="h-12 w-auto md:h-14 lg:h-16">
+                </a>
+
+                <nav
+                    aria-label="Footer"
+                    class="grid flex-1 grid-cols-2 gap-x-6 gap-y-8 rounded-[20px] bg-[#1F4C35] px-6 py-8 sm:grid-cols-3 md:rounded-[24px] md:px-10 md:py-10 lg:grid-cols-5 lg:gap-x-8"
+                    style="font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
+                >
+                    <div>
+                        <h4 class="mb-3 text-sm font-bold text-[#F2EFE6]">Shop</h4>
+                        <ul class="space-y-2 text-sm text-[#F2EFE6]/85">
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Shop All</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Bestsellers</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">AM/PM</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Body</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Face</a></li>
+                            <li><a href="quiz.html" class="transition-colors hover:text-[#F2EFE6]">Face Quiz</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="mb-3 text-sm font-bold text-[#F2EFE6]">Skin Type</h4>
+                        <ul class="space-y-2 text-sm text-[#F2EFE6]/85">
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Normal</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Dry</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Combination</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Mature &amp; Aging</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="mb-3 text-sm font-bold text-[#F2EFE6]">Policies</h4>
+                        <ul class="space-y-2 text-sm text-[#F2EFE6]/85">
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Refund Policy</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Privacy Policy</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="mb-3 text-sm font-bold text-[#F2EFE6]">Business</h4>
+                        <ul class="space-y-2 text-sm text-[#F2EFE6]/85">
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Wholesale</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Retail</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="mb-3 text-sm font-bold text-[#F2EFE6]">Resources</h4>
+                        <ul class="space-y-2 text-sm text-[#F2EFE6]/85">
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Contact us</a></li>
+                            <li><a href="#" class="transition-colors hover:text-[#F2EFE6]">Blog</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Right: Newsletter -->
+            <div class="flex flex-col items-center justify-center rounded-[20px] bg-[#C5DBC3] px-6 py-10 text-center md:rounded-[24px] md:px-10 md:py-12 lg:px-12 lg:py-16">
+                <h3
+                    class="mb-8 max-w-[18rem] text-[1.35rem] leading-snug text-[#1F4C35] md:max-w-xs md:text-2xl lg:max-w-sm lg:text-[1.65rem]"
+                    style="font-family:'Cormorant Garamond', serif;"
+                >
+                    Subscribe To Our Newsletter And Get 15% Off On Your First Order
+                </h3>
+                <form class="flex w-full max-w-[18rem] flex-col items-center gap-4 md:max-w-xs" action="#" method="post">
+                    <label for="footer-email" class="sr-only">Email address</label>
+                    <input
+                        id="footer-email"
+                        type="email"
+                        name="email"
+                        autocomplete="email"
+                        placeholder="ENTER YOUR EMAIL"
+                        required
+                        class="w-full rounded-full border border-[#1F4C35] bg-[#F2EFE6] px-6 py-3.5 text-xs uppercase tracking-[0.18em] text-[#1F4C35] placeholder-[#1F4C35]/60 focus:outline-none focus:ring-2 focus:ring-[#1F4C35]/30"
+                        style="font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
+                    >
+                    <button
+                        type="submit"
+                        class="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[#1F4C35] bg-[#C5DBC3] px-8 py-3 text-xs font-bold uppercase tracking-[0.18em] text-[#1F4C35] transition-colors hover:bg-[#1F4C35] hover:text-[#F2EFE6] focus:outline-none focus:ring-2 focus:ring-[#1F4C35]/30"
+                        style="font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
+                    >
+                        Subscribe <span aria-hidden="true">&rarr;</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- ===================== STICKY BUNDLE BAR ===================== -->
+    <div id="bundle-bar" class="fixed bottom-0 left-0 w-full bg-[#F2EFE6] border-t border-[#1F4C35]/15 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <div class="flex items-center justify-between gap-3 md:gap-6 px-4 md:px-8 lg:px-12 py-3 md:py-4 max-w-[1440px] mx-auto">
+
+            <!-- Slots -->
+            <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                <div id="bundle-slot-1" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center"></div>
+                <div id="bundle-slot-2" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+            </div>
+
+            <!-- Center label -->
+            <p class="hidden md:block flex-1 text-center text-[#1F4C35] text-base md:text-lg font-semibold" style="font-family:'DM Sans', sans-serif;">Build Your Own Bundle</p>
+
+            <!-- CTA -->
+            <button id="bundle-cta" type="button" class="flex-shrink-0 bg-[#1F4C35] text-white rounded-full px-5 md:px-8 py-3 text-xs md:text-sm font-semibold uppercase tracking-wider whitespace-nowrap" style="font-family:'DM Sans', sans-serif;">
+                Add at least 3 items to start
+            </button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const BUNDLE_KEY  = 'euphorielBundle';
+            const MAX_SLOTS   = 2;
+            const DISCOUNT_AT = 2;
+
+            function getBundle() {
+                try { return JSON.parse(localStorage.getItem(BUNDLE_KEY)) || []; }
+                catch (e) { return []; }
+            }
+
+            function saveBundle(items) {
+                localStorage.setItem(BUNDLE_KEY, JSON.stringify(items));
+            }
+
+            function slotPlaceholder(n) {
+                const labels = { 2: 'Unlock<br>15% Off' };
+                const badge  = `<span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center shadow-sm">${n}</span>`;
+                const label  = labels[n]
+                    ? `<span class="text-[#1F4C35] text-[10px] md:text-xs font-semibold leading-tight px-1">${labels[n]}</span>`
+                    : '';
+                return badge + label;
+            }
+
+            function renderBundleBar() {
+                const items = getBundle();
+
+                for (let i = 0; i < MAX_SLOTS; i++) {
+                    const slot = document.getElementById('bundle-slot-' + (i + 1));
+                    if (!slot) continue;
+
+                    if (items[i]) {
+                        slot.innerHTML = `
+                            <span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center z-10 shadow-sm">${i + 1}</span>
+                            <span class="bundle-remove absolute inset-1.5 rounded-md bg-black/0 group-hover:bg-black/50 flex items-center justify-center cursor-pointer transition-colors duration-200 z-10" data-index="${i}" aria-label="Remove ${items[i].name}">
+                                <span class="text-white text-base md:text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200">&times;</span>
+                            </span>
+                            <img src="${items[i].img}" alt="${items[i].name}" class="w-full h-full object-contain p-1.5">
+                            <span class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#1F4C35] text-white text-[10px] md:text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">${items[i].name}</span>
+                        `;
+                    } else {
+                        slot.innerHTML = slotPlaceholder(i + 1);
+                    }
+                }
+
+                document.querySelectorAll('.bundle-remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = parseInt(btn.dataset.index, 10);
+                        const items = getBundle();
+                        items.splice(idx, 1);
+                        saveBundle(items);
+                        renderBundleBar();
+                    });
+                });
+
+                const cta = document.getElementById('bundle-cta');
+                if (items.length === 0) {
+                    cta.textContent = 'Add at least 2 items to start';
+                } else if (items.length < DISCOUNT_AT) {
+                    const remaining = DISCOUNT_AT - items.length;
+                    cta.textContent = `Add ${remaining} more item${remaining > 1 ? 's' : ''} to unlock 15% off`;
+                } else {
+                    cta.textContent = `Bundle ready — ${items.length} item${items.length > 1 ? 's' : ''} added`;
+                }
+            }
+
+            window.addToBundle = function (item) {
+                const items = getBundle();
+                if (items.length >= MAX_SLOTS) return;
+                items.push(item);
+                saveBundle(items);
+                renderBundleBar();
+            };
+
+            document.querySelectorAll('.add-to-bundle-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    window.addToBundle({
+                        name:  btn.dataset.name,
+                        img:   btn.dataset.img,
+                        price: btn.dataset.price,
+                    });
+                });
+            });
+
+            // Auto-add the quiz-matched product, e.g. /bundle?face=balance
+            const faceKey = new URLSearchParams(window.location.search).get('face');
+            if (faceKey) {
+                const matchBtn = document.querySelector('.add-to-bundle-btn[data-face-key="' + faceKey + '"]');
+                if (matchBtn) {
+                    const items = getBundle();
+                    const alreadyAdded = items.some(i => i.name === matchBtn.dataset.name);
+                    if (!alreadyAdded) {
+                        window.addToBundle({
+                            name:  matchBtn.dataset.name,
+                            img:   matchBtn.dataset.img,
+                            price: matchBtn.dataset.price,
+                        });
+                    }
+                }
+            }
+
+            renderBundleBar();
+        })();
+    </script>
+
+</body>
+</html>

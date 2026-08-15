@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Glow Formula — Euphoriel</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans':    ['DM Sans', 'sans-serif'],
+                        'serif':   ['Playfair Display', 'serif'],
+                        'display': ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        'brand-green':  '#1F4C35',
+                        'brand-light':  '#e8f0e9',
+                        'brand-muted':  '#a7b7a4',
+                    },
+                    letterSpacing: {
+                        'ultra-wide': '0.15em',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @font-face {
+            font-family: 'BrandFont';
+            src: url('font.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html, body { height: 100%; margin: 0; }
+
+        /* Floating entrance animation */
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px) rotate(var(--rot)); }
+            to   { opacity: 1; transform: translateY(0)   rotate(var(--rot)); }
+        }
+
+        .product-img {
+            position: absolute;
+            border-radius: 1rem;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(31,76,53,0.18), 0 4px 16px rgba(0,0,0,0.10);
+            animation: floatIn 0.9s ease both;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .product-img:hover {
+            box-shadow: 0 30px 80px rgba(31,76,53,0.28), 0 8px 24px rgba(0,0,0,0.14);
+            z-index: 20 !important;
+        }
+
+        /* Subtle continuous float */
+        @keyframes drift {
+            0%, 100% { transform: translateY(0)   rotate(var(--rot)); }
+            50%       { transform: translateY(-8px) rotate(var(--rot)); }
+        }
+        .product-img { animation: floatIn 0.9s ease both, drift 6s ease-in-out infinite; }
+
+        /* Each card has its own delay so they drift at different phases */
+        .img-1 { --rot: -11deg;  animation-delay: 0s,   0.9s; }
+        .img-2 { --rot:   7deg;  animation-delay: 0.1s, 1.4s; }
+        .img-4 { --rot:  12deg;  animation-delay: 0.2s, 0.5s; }
+        .img-6 { --rot:   6deg;  animation-delay: 0.3s, 1.8s; }
+
+        /* Right-panel slide-in */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .slide-up   { animation: slideUp 0.8s ease both; }
+        .delay-1    { animation-delay: 0.3s; }
+        .delay-2    { animation-delay: 0.55s; }
+        .delay-3    { animation-delay: 0.75s; }
+
+        /* Quiz button ripple */
+        .quiz-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .quiz-btn:hover::after { opacity: 1; }
+    </style>
+</head>
+
+<body class="font-sans bg-white overflow-hidden" style="height:100vh;">
+
+<!-- ─── Full-screen two-column layout ─── -->
+<div class="flex h-screen w-full">
+
+    <!-- ══════════════════════════════════════
+         LEFT PANEL — scattered product photos
+         ══════════════════════════════════════ -->
+    <div class="relative w-[44%] bg-[#f5f7f5] overflow-hidden flex-shrink-0">
+
+        <!-- Subtle radial glow from center -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at 55% 50%, rgba(179,213,180,0.35) 0%, transparent 90%);"></div>
+
+        <!-- Product images — positioned absolutely, each with a unique tilt -->
+
+        <img src="Copy_of_Balance_Elixir_Face_Oil-01.png.webp"
+             alt="Balance Elixir Face Oil"
+             class="product-img img-1"
+             style="width:clamp(150px,34%,210px); top:10%; left:10%; z-index:4; animation-duration: 0.9s, 7s;">
+
+        <img src="Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp"
+             alt="Harmonic Elixir Face Oil"
+             class="product-img img-2"
+             style="width:clamp(150px,30%,210px); top:8%; left:48%; z-index:3; animation-duration: 0.9s, 5.5s;">
+
+        <img src="Copy_of_Timeless_Elixir_Face_Oil-01.webp"
+             alt="Timeless Elixir Face Oil"
+             class="product-img img-4"
+             style="width:clamp(150px,29%,210px); top:46%; left:50%; z-index:5; animation-duration: 0.9s, 6.5s;">
+
+        <img src="Copy_of_Renewal_Elixir_Face_Oil-01.png.webp"
+             alt="Renewal Elixir Face Oil"
+             class="product-img img-6"
+             style="width:clamp(150px,35%,210px); top:44%; left:8%; z-index:6; animation-duration: 0.9s, 7.5s;">
+
+    </div>
+
+    <!-- ══════════════════════════════════════
+         RIGHT PANEL — logo + quiz CTA
+         ══════════════════════════════════════ -->
+    <div class="relative w-[56%] flex flex-col items-center bg-white">
+
+        <!-- Logo — top right -->
+        <div class="absolute top-8 right-10 slide-up">
+            <a href="index.html">
+                <img src="logo_green.svg"
+                     alt="Euphoriel"
+                     style="height:36px; width:auto;">
+            </a>
+        </div>
+
+        <!-- Centred content block -->
+        <div class="flex flex-col justify-center h-full w-full px-10 md:px-16" style="max-width:34rem;">
+
+            <!-- Heading -->
+            <h1 class="slide-up leading-tight mb-5"
+                style="font-family:'BrandFont',sans-serif; font-size:clamp(2.85rem,5.4vw,4.6rem); font-weight:400; color:#1F4C35; letter-spacing:-0.02em;">
+                FIND MY<br>PERFECT<br>GLOW FORMULA
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="slide-up delay-1 font-sans text-gray-600 leading-relaxed mb-10"
+               style="font-size:clamp(1.05rem,1.4vw,1.2rem); font-weight:500; max-width:420px;">
+                Answer 4 quick questions and we'll match you to the right face oil for your skin.
+            </p>
+
+            <!-- CTA button -->
+            <div class="slide-up delay-2">
+                <button
+                    id="startQuizBtn"
+                    class="quiz-btn relative inline-block font-sans font-bold uppercase tracking-ultra-wide text-white rounded-full cursor-pointer transition-all duration-300"
+                    style="background:#1F4C35; padding:22px 60px; font-size:1rem; letter-spacing:0.16em; border:none; outline:none; box-shadow:0 12px 28px rgba(31,76,53,0.22);"
+                    onmouseover="this.style.background='#2d6b4a'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 16px 34px rgba(31,76,53,0.28)';"
+                    onmouseout="this.style.background='#1F4C35'; this.style.transform='translateY(0)'; this.style.boxShadow='0 12px 28px rgba(31,76,53,0.22)';">
+                    START QUIZ
+                </button>
+            </div>
+
+            <!-- Small trust line -->
+            <p class="slide-up delay-3 text-xs text-gray-400 mt-6 uppercase tracking-widest" style="font-weight:500;">
+                4 questions &nbsp;·&nbsp; About 1 minute
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     QUIZ OVERLAY MODAL
+     ══════════════════════════════════════ -->
+<div id="quizOverlay"
+     class="fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex items-center justify-center"
+     style="display:none !important;">
+    <div id="quizCard"
+         class="bg-white rounded-2xl shadow-2xl max-w-lg w-full mx-6 p-10 relative"
+         style="border:1px solid rgba(31,76,53,0.1);">
+
+        <!-- Close -->
+        <button id="closeQuiz"
+                class="absolute top-5 right-6 text-gray-400 hover:text-brand-green text-2xl font-light leading-none"
+                style="background:none;border:none;cursor:pointer;">&times;</button>
+
+        <!-- Progress bar -->
+        <div class="w-full bg-gray-100 rounded-full h-1 mb-8">
+            <div id="progressBar"
+                 class="h-1 rounded-full transition-all durative on-500"
+                 style="width:25%; background:#1F4C35;"></div>
+        </div>
+
+        <!-- Question container -->
+        <div id="questionWrap"></div>
+
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mt-8">
+            <button id="prevBtn"
+                    class="text-sm font-semibold uppercase tracking-wider text-gray-400 hover:text-brand-green transition-colors"
+                    style="background:none;border:none;cursor:pointer;">← Back</button>
+            <button id="nextBtn"
+                    class="font-semibold uppercase tracking-wider text-white rounded-full px-8 py-3 text-sm transition-all duration-300"
+                    style="background:#1F4C35; border:none; cursor:pointer; letter-spacing:0.12em;"
+                    onmouseover="this.style.background='#2d6b4a';"
+                    onmouseout="this.style.background='#1F4C35';">Next →</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     LEAD CAPTURE OVERLAY
+     ══════════════════════════════════════ -->
+<div id="leadOverlay"
+     class="fixed inset-0 z-50 flex items-center justify-center"
+     style="display:none !important; background:#f5f7f5;">
+
+    <!-- Products — left edge -->
+    <img src="Copy_of_Balance_Elixir_Face_Oil-01.png.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:155px; top:2%; left:-18px; transform:rotate(-22deg); z-index:1;">
+    <img src="Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:172px; top:36%; left:-22px; transform:rotate(12deg); z-index:1;">
+    <img src="Copy_of_Timeless_Elixir_Face_Oil-01.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:150px; bottom:3%; left:16px; transform:rotate(-16deg); z-index:1;">
+
+    <!-- Products — right edge -->
+    <img src="Copy_of_Renewal_Elixir_Face_Oil-01.png.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:135px; top:2%; right:-12px; transform:rotate(20deg); z-index:1;">
+    <img src="Copy_of_Balance_Elixir_Face_Oil-02.png.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:135px; top:37%; right:-12px; transform:rotate(-14deg); z-index:1;">
+    <img src="Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp" alt=""
+         class="absolute pointer-events-none"
+         style="width:165px; bottom:3%; right:8px; transform:rotate(9deg); z-index:1;">
+
+    <!-- Form content -->
+    <div class="relative flex flex-col items-center text-center w-full max-w-md px-8" style="z-index:2;">
+
+        <h2 style="font-family:'BrandFont',sans-serif; font-size:2.5rem; color:#1F4C35; line-height:1.1; margin-bottom:0.6rem;">
+            Almost there!
+        </h2>
+        <p class="text-gray-600 mb-7 leading-relaxed" style="font-size:0.9rem; max-width:380px;">
+            Enter your info to get your results. You'll also get early access to new products and exclusive offers.
+        </p>
+
+        <form id="leadForm" class="w-full" style="display:flex; flex-direction:column; gap:12px;">
+
+            <div style="display:flex; gap:12px;">
+                <input type="text" id="leadFirst" placeholder="First Name"
+                       class="font-sans text-sm text-gray-700 bg-white"
+                       style="flex:1; padding:14px 20px; border-radius:9999px; border:1.5px solid #d1d5db; outline:none; min-width:0;">
+                <input type="text" id="leadLast" placeholder="Last Name"
+                       class="font-sans text-sm text-gray-700 bg-white"
+                       style="flex:1; padding:14px 20px; border-radius:9999px; border:1.5px solid #d1d5db; outline:none; min-width:0;">
+            </div>
+
+            <input type="email" id="leadEmail" placeholder="Email"
+                   class="w-full font-sans text-sm text-gray-700 bg-white"
+                   style="padding:14px 20px; border-radius:9999px; border:1.5px solid #d1d5db; outline:none;">
+
+            <input type="tel" id="leadPhone" placeholder="Phone Number (optional)"
+                   class="w-full font-sans text-sm text-gray-700 bg-white"
+                   style="padding:14px 20px; border-radius:9999px; border:1.5px solid #d1d5db; outline:none;">
+
+            <div style="display:flex; align-items:flex-start; gap:10px; text-align:left; padding:4px 4px 8px;">
+                <input type="checkbox" id="leadConsent"
+                       style="width:15px; height:15px; margin-top:2px; flex-shrink:0; accent-color:#1F4C35;">
+                <label for="leadConsent" class="font-sans text-gray-400 leading-relaxed" style="font-size:0.7rem;">
+                    By submitting, you agree to receive marketing messages from Euphoriel. Consent is not a condition of purchase. Reply STOP to cancel. Msg &amp; data rates may apply.
+                </label>
+            </div>
+
+            <button type="submit"
+                    class="w-full font-sans font-semibold uppercase text-white"
+                    style="padding:16px; border-radius:9999px; background:#1F4C35; border:none; cursor:pointer; letter-spacing:0.12em; font-size:0.85rem;"
+                    onmouseover="this.style.background='#2d6b4a';"
+                    onmouseout="this.style.background='#1F4C35';">
+                Get My Results
+            </button>
+
+            <button type="button" id="skipLeadBtn"
+                    class="w-full font-sans font-semibold uppercase"
+                    style="padding:16px; border-radius:9999px; background:none; border:1.5px solid #1F4C35; color:#1F4C35; cursor:pointer; letter-spacing:0.12em; font-size:0.85rem;">
+                Skip
+            </button>
+
+        </form>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     RESULT OVERLAY
+     ══════════════════════════════════════ -->
+<div id="resultOverlay"
+     class="fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex items-center justify-center"
+     style="display:none !important;">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full mx-6 p-10 relative overflow-y-auto"
+         style="border:1px solid rgba(31,76,53,0.1); max-height:90vh;">
+
+        <button id="closeResult"
+                class="absolute top-5 right-6 text-gray-400 hover:text-brand-green text-2xl font-light leading-none"
+                style="background:none;border:none;cursor:pointer;">&times;</button>
+
+        <p class="text-xs uppercase tracking-widest font-semibold mb-5"
+           style="color:#a7b7a4; letter-spacing:0.14em;">Your match</p>
+
+        <div class="flex gap-6 items-start mb-6">
+            <img id="resultImg"
+                 alt="Your face match"
+                 class="rounded-xl shadow-md flex-shrink-0"
+                 style="height:130px; width:auto; object-fit:contain;">
+            <div>
+                <h2 id="resultName"
+                    class="font-display font-semibold leading-tight mb-1"
+                    style="font-size:1.6rem; color:#1F4C35;"></h2>
+                <p id="resultTagline"
+                   class="text-xs uppercase tracking-wider mb-3"
+                   style="color:#a7b7a4; letter-spacing:0.1em;"></p>
+                <p id="resultDesc"
+                   class="text-gray-500 leading-relaxed text-sm mb-3"></p>
+                <p id="resultFacePrice"
+                   class="font-semibold text-sm"
+                   style="color:#1F4C35;"></p>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 mt-7">
+            <a id="shopBtn" href="bundle.html"
+               class="inline-block font-semibold uppercase tracking-wider text-white rounded-full px-8 py-3 text-sm text-center"
+               style="background:#1F4C35; letter-spacing:0.12em;">Add To My Bundle</a>
+            <button id="retakeBtn"
+                    class="font-semibold uppercase tracking-wider rounded-full px-8 py-3 text-sm"
+                    style="border:1.5px solid #1F4C35; color:#1F4C35; background:none; cursor:pointer; letter-spacing:0.12em;">
+                Retake
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     QUIZ LOGIC
+     ══════════════════════════════════════ -->
+<script>
+    const questions = [
+        {
+            q: "How would you describe your skin type?",
+            options: [
+                { label: "Oily, shiny, or breakout-prone",                scores: { balance: 3 } },
+                { label: "Combination — oily in some areas, dry in others", scores: { harmonic: 3 } },
+                { label: "Dry, tight, or dehydrated",                     scores: { renewal: 3 } },
+                { label: "Mature, with fine lines or loss of firmness",   scores: { timeless: 3 } },
+            ]
+        },
+        {
+            q: "What's your biggest skin concern right now?",
+            options: [
+                { label: "Clogged pores, blackheads, or breakouts",      scores: { balance: 3 } },
+                { label: "Uneven texture or dullness",                   scores: { harmonic: 2, renewal: 1 } },
+                { label: "Fine lines or loss of firmness",               scores: { timeless: 3 } },
+                { label: "Redness, tightness, or stripped-feeling skin", scores: { renewal: 3 } },
+            ]
+        },
+        {
+            q: "Right after cleansing, how does your skin feel?",
+            options: [
+                { label: "Oily again within an hour",                    scores: { balance: 3 } },
+                { label: "Tight in some spots, oily in others",          scores: { harmonic: 3 } },
+                { label: "Comfortable, just needs more moisture",        scores: { renewal: 3 } },
+                { label: "Tight, dry, or irritated",                     scores: { renewal: 3 } },
+            ]
+        },
+        {
+            q: "What's the #1 result you want from your skincare routine?",
+            options: [
+                { label: "Clearer skin and less shine",                  scores: { balance: 3 } },
+                { label: "Balance — calm oily zones, hydrate dry zones", scores: { harmonic: 3 } },
+                { label: "Firmer, smoother, more youthful-looking skin", scores: { timeless: 3 } },
+                { label: "Calm, soothe, and protect sensitive skin",     scores: { renewal: 3 } },
+            ]
+        },
+    ];
+
+    const faceProducts = {
+        balance: {
+            name: "Balance Elixir",
+            tagline: "Oily and blemish-prone skin",
+            desc: "Regulates oil, clears pores, and calms your skin without drying it out. Lightweight and fast-absorbing with jojoba, tamanu, and sea buckthorn.",
+            img: "Copy_of_Balance_Elixir_Face_Oil-01.png.webp",
+            price: "$39.99 CAD",
+        },
+        harmonic: {
+            name: "Harmonic Elixir",
+            tagline: "Combination skin",
+            desc: "Hydrates where you need it, regulates where you don't. Works on both the oily zones and dry patches at the same time without clogging pores.",
+            img: "Copy_of_Harmonic_Elixir_Face_Oil-01.png.webp",
+            price: "$39.99 CAD",
+        },
+        renewal: {
+            name: "Renewal Elixir",
+            tagline: "Normal to dry skin",
+            desc: "Deep hydration without feeling heavy. Rosehip, marula, and vitamin C replenish moisture, even skin tone, and bring back the glow.",
+            img: "Copy_of_Renewal_Elixir_Face_Oil-01.png.webp",
+            price: "$39.99 CAD",
+        },
+        timeless: {
+            name: "Timeless Elixir",
+            tagline: "Mature and aging skin",
+            desc: "Firms, smooths, and nourishes skin that has lost some elasticity. Coenzyme Q10, camellia, and vitamin C visibly soften fine lines over time.",
+            img: "Copy_of_Timeless_Elixir_Face_Oil-01.webp",
+            price: "$39.99 CAD",
+        },
+    };
+
+    let step    = 0;
+    let answers = [];
+    let pendingFaceKey = null;
+
+    const overlay      = document.getElementById('quizOverlay');
+    const leadOverlay  = document.getElementById('leadOverlay');
+    const resultScreen = document.getElementById('resultOverlay');
+    const qWrap        = document.getElementById('questionWrap');
+    const progressBar  = document.getElementById('progressBar');
+    const prevBtn      = document.getElementById('prevBtn');
+    const nextBtn      = document.getElementById('nextBtn');
+
+    function showQuestion() {
+        const q    = questions[step];
+        const saved = answers[step];
+        progressBar.style.width      = ((step + 1) / questions.length * 100) + '%';
+        prevBtn.style.visibility     = step === 0 ? 'hidden' : 'visible';
+        nextBtn.textContent          = step === questions.length - 1 ? 'See My Match' : 'Next';
+
+        qWrap.innerHTML = `
+            <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-3"
+               style="letter-spacing:0.12em;">
+                Question ${step + 1} of ${questions.length}
+            </p>
+            <h2 class="font-display font-semibold mb-6"
+                style="font-size:1.55rem; color:#1F4C35; line-height:1.25;">${q.q}</h2>
+            <div class="space-y-3">
+                ${q.options.map((o, i) => `
+                    <button type="button"
+                        class="quiz-opt w-full text-left px-5 py-4 rounded-xl border text-sm font-medium transition-all duration-200"
+                        data-idx="${i}"
+                        style="border-color:${saved && saved.idx === i ? '#1F4C35' : '#e5e7eb'};
+                               background:${saved && saved.idx === i ? '#f0f7f2' : 'white'};
+                               color:${saved && saved.idx === i ? '#1F4C35' : '#374151'};">
+                        ${o.label}
+                    </button>`).join('')}
+            </div>`;
+    }
+
+    qWrap.addEventListener('click', (e) => {
+        const btn = e.target.closest('.quiz-opt');
+        if (!btn || !qWrap.contains(btn)) return;
+        selectOption(parseInt(btn.dataset.idx, 10));
+    });
+
+    function selectOption(idx) {
+        answers[step] = { scores: questions[step].options[idx].scores, idx };
+        document.querySelectorAll('.quiz-opt').forEach((b, i) => {
+            const sel = i === idx;
+            b.style.borderColor = sel ? '#1F4C35' : '#e5e7eb';
+            b.style.background  = sel ? '#f0f7f2' : 'white';
+            b.style.color       = sel ? '#1F4C35' : '#374151';
+        });
+    }
+
+    function openQuiz() {
+        step    = 0;
+        answers = [];
+        overlay.style.setProperty('display', 'flex', 'important');
+        showQuestion();
+    }
+
+    function closeQuiz() {
+        overlay.style.setProperty('display', 'none', 'important');
+    }
+
+    function computeResults() {
+        const faceScores = { balance: 0, harmonic: 0, renewal: 0, timeless: 0 };
+
+        answers.forEach(a => {
+            if (!a) return;
+            Object.entries(a.scores).forEach(([k, v]) => {
+                if (k in faceScores) faceScores[k] += v;
+            });
+        });
+
+        pendingFaceKey = Object.entries(faceScores).sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    function renderResult() {
+        const face = faceProducts[pendingFaceKey];
+
+        document.getElementById('resultName').textContent      = face.name;
+        document.getElementById('resultTagline').textContent   = face.tagline;
+        document.getElementById('resultDesc').textContent      = face.desc;
+        document.getElementById('resultImg').src               = face.img;
+        document.getElementById('resultFacePrice').textContent = face.price;
+
+        leadOverlay.style.setProperty('display', 'none', 'important');
+        resultScreen.style.setProperty('display', 'flex', 'important');
+    }
+
+    function showResult() {
+        computeResults();
+        overlay.style.setProperty('display', 'none', 'important');
+        leadOverlay.style.setProperty('display', 'flex', 'important');
+    }
+
+    nextBtn.addEventListener('click', () => {
+        if (!answers[step]) {
+            const btns = qWrap.querySelectorAll('.quiz-opt');
+            btns[0].style.borderColor = '#f87171';
+            setTimeout(() => btns[0].style.borderColor = '#e5e7eb', 600);
+            return;
+        }
+        if (step < questions.length - 1) {
+            step++;
+            showQuestion();
+        } else {
+            showResult();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (step > 0) { step--; showQuestion(); }
+    });
+
+    document.getElementById('closeQuiz').addEventListener('click', closeQuiz);
+    document.getElementById('closeResult').addEventListener('click', () => {
+        resultScreen.style.setProperty('display', 'none', 'important');
+    });
+
+    document.getElementById('retakeBtn').addEventListener('click', () => {
+        resultScreen.style.setProperty('display', 'none', 'important');
+        openQuiz();
+    });
+
+    document.getElementById('shopBtn').addEventListener('click', () => {
+        const face = faceProducts[pendingFaceKey];
+        if (!face) return;
+        let items = [];
+        try { items = JSON.parse(localStorage.getItem('euphorielBundle')) || []; }
+        catch (e) { items = []; }
+        items.push({ name: face.name, img: face.img, price: face.price });
+        localStorage.setItem('euphorielBundle', JSON.stringify(items));
+    });
+
+    document.getElementById('skipLeadBtn').addEventListener('click', renderResult);
+
+    document.getElementById('leadForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        renderResult();
+    });
+
+    document.getElementById('startQuizBtn').addEventListener('click', openQuiz);
+</script>
+
+</body>
+</html>

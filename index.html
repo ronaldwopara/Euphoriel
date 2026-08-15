@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euphoriel - Feed Your Skin</title>
+
+    <!-- Import Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Import Google Fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Configure Tailwind --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['DM Sans', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                        'display': ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        'brand-green': '#334b3f',
+                        'brand-bg': '#f8f7ff5',
+                        'brand-top-bar': '#B3D5B4',
+                        'brand-muted-green': '#a7b7a4', // Original muted green
+                        'gradient-start': '#b3d5b4', // New start color for gradient
+                        'gradient-end': '#95a892',   // New end color for gradient
+                    },
+                    letterSpacing: {
+                        'ultra-wide': '0.15em',
+                    },
+                    // --- ADDED FOR CAROUSEL ---
+                    animation: {
+                        // Adjust duration (e.g., 40s) to make it slower or faster
+                        marquee: 'marquee 40s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            // Animate to -100% of one list's width (which is 50% of the total container)
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                    },
+                    // --- END OF ADDITION ---
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-white text-gray-900">
+
+    <!-- Top Announcement Bar - CAROUSEL UPDATED --><div class="px-4 md:px-6 pt-4 pb-3">
+        <!-- Main bar container: rounded and hides overflow --><div class="bg-brand-top-bar text-brand-green text-xs md:text-sm text-center font-medium rounded-2xl overflow-hidden">
+            <!-- Ticker wrapper: provides padding --><div class="py-3 px-4">
+                <!-- Ticker content: this element will animate --><div class="flex animate-marquee whitespace-nowrap">
+                    <!-- List 1: The main content --><div class="flex-shrink-0 flex items-center justify-around space-x-8 px-4">
+                        <span class="uppercase">VEGAN & CRUELTY-FREE</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">MADE IN CANADA</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">WATERLESS & CONCENTRATED</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">CLEAN, CONSCIOUS FORMULAS</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">FREE SHIPPING OVER $75</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase font-semibold">GET 15% OFF YOUR FIRST ORDER</span>
+                    </div>
+                    <!-- List 2: Duplicate for seamless loop (hidden from screen readers) --><div class="flex-shrink-0 flex items-center justify-around space-x-8 px-4" aria-hidden="true">
+                        <span class="uppercase">VEGAN & CRUELTY-FREE</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">MADE IN CANADA</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">WATERLESS & CONCENTRATED</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">CLEAN, CONSCIOUS FORMULAS</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase">FREE SHIPPING OVER $75</span>
+                        <span class="text-lg leading-none opacity-60">&bull;</span>
+                        <span class="uppercase font-semibold">GET 15% OFF YOUR FIRST ORDER</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+      HEADER: MOVED & MADE STICKY
+      - Moved from inside hero to outside
+      - Added 'sticky top-4 z-50'
+      - Changed styling to work on light backgrounds (light bg, dark text)
+    -->
+    <!-- STICKY HEADER UPDATED:
+        - Added id="stickyHeader"
+        - Added transition-all duration-300 ease-in-out
+    --><header id="stickyHeader" class="sticky top-4 z-50 px-4 md:px-6 py-4 transition-all duration-300 ease-in-out">
+        <!-- UPDATED:
+            - Added id="navContainer"
+            - Added transition-all duration-300 ease-in-out
+        --><div id="navContainer" class="container mx-auto px-6 md:px-10 transition-all duration-300 ease-in-out">
+            <!-- Glassmorphic Nav Container:
+                - Added id="mainNav"
+                - Added transition-all duration-300 ease-in-out
+            --><nav id="mainNav" class="flex justify-between items-center text-brand-green bg-white/60 backdrop-blur-lg rounded-full px-6 py-3 border border-black/10 shadow-lg transition-all duration-300 ease-in-out">
+
+                <!-- Left Nav (Desktop): UPDATED button bg/hover opacity --><div class="hidden md:flex items-center gap-3">
+                    <a href="#" class="px-5 py-2 bg-brand-green/20 backdrop-blur-sm rounded-full text-sm tracking-wider uppercase font-semibold hover:bg-brand-green/30 transition-all">SHOP</a>
+                    <a href="#" class="px-5 py-2 bg-brand-green/20 backdrop-blur-sm rounded-full text-sm tracking-wider uppercase font-semibold hover:bg-brand-green/30 transition-all">CONTACT</a>
+                </div>
+
+                <!-- Mobile Menu Icon (Hamburger) --><div class="md:hidden">
+                    <button class="text-brand-green p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Logo --><div>
+                    <a href="#" class="font-serif text-2xl md:text-3xl text-brand-green">Euphoriel</a>
+                </div>
+
+                <!-- Right Nav with Icons: UPDATED button bg/hover opacity --><div class="flex items-center gap-3">
+                    <!-- Search Button --><a href="#" class="px-4 py-2 bg-brand-green/20 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm tracking-wider uppercase font-semibold hover:bg-brand-green/30 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span class="hidden md:inline">SEARCH</span>
+                    </a>
+
+                    <!-- Cart Button --><a href="#" class="px-4 py-2 bg-brand-green/20 backdrop-blur-sm rounded-full flex items-center gap-2 text-sm tracking-wider uppercase font-semibold hover:bg-brand-green/30 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="hidden md:inline">CART</span>
+                        <span>(0)</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Wrapper for Hero Section
+        - UPDATED: Added id="heroWrapper" and transition class
+    --><div id="heroWrapper" class="px-4 md:px-6 -mt-24 transition-all duration-300 ease-in-out"> <!-- Negative margin to pull hero up behind sticky header -->
+        <!-- Main Hero Section --><main class="relative h-[90vh] bg-gray-900 rounded-2xl overflow-hidden">
+
+            <!-- Background Video Container --><div class="absolute inset-0 overflow-hidden">
+                <video
+                    id="heroVideo"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                    style="
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        min-width: 100%;
+                        min-height: 100%;
+                        width: auto;
+                        height: auto;
+                        transform: translate(-50%, -50%) scale(1.35);
+                        object-fit: cover;
+                    ">
+                    <!-- Reverted to local path -->
+                    <source src="bg-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <!-- Dark Gradient Overlay --><div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent z-5"></div>
+
+            <!-- Header & Navigation with Glassmorphism -->
+            <!-- THIS BLOCK WAS MOVED -->
+
+            <!-- Hero Content - Lower Left - Editorial Style --><div class="absolute bottom-0 left-0 z-10 pb-16 md:pb-20 px-6 md:px-10 max-w-3xl">
+
+                <!-- Eyebrow Text --><div class="mb-6">
+                    <span class="inline-block text-white/90 text-xs md:text-sm tracking-ultra-wide uppercase font-medium">
+                        This Fall & Winter
+                    </span>
+                </div>
+
+                <!-- Main Headline - Editorial Style --><h1 class="font-display text-white leading-[0.95] mb-6">
+                    <span class="block text-6xl md:text-7xl lg:text-8xl font-light tracking-tight">
+                        Feed Your
+                    </span>
+                    <span class="block text-7xl md:text-8xl lg:text-9xl font-semibold tracking-tight -mt-2 md:-mt-3">
+                        Skin
+                    </span>
+                </h1>
+
+                <!-- Supporting Copy - Refined --><div class="max-w-xl space-y-3 mb-10">
+                    <p class="text-white/95 text-base md:text-lg leading-relaxed font-normal">
+                        Waterless, whole-food skincare powered by fatty acids,
+                        antioxidants & nutrients to fight dryness, aging & barrier damage.
+                    </p>
+                    <p class="text-white/85 text-sm md:text-base leading-relaxed">
+                        Perfect for dry, sensitive & combination skin during colder months.
+                    </p>
+                </div>
+
+                <!-- CTA Button - More Prominent --><div class="flex items-center gap-4">
+                    <a href="#" class="inline-block py-4 px-10 bg-white text-brand-green rounded-full font-semibold tracking-wide uppercase text-sm hover:bg-white/90 transition-all duration-300 shadow-lg">
+                        Shop Ritual Kits
+                    </a>
+                    <a href="#" class="inline-block py-4 px-10 bg-white/10 backdrop-blur-md border border-white/40 rounded-full text-white font-medium tracking-wide uppercase text-sm hover:bg-white/20 hover:border-white/60 transition-all duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Play/Pause Button - Bottom Right (Rhode Style) --><button
+                id="playPauseBtn"
+                class="absolute bottom-16 md:bottom-20 right-8 md:right-12 z-20 w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                aria-label="Play or pause video">
+                <!-- Pause Icon (shown by default) --><svg id="pauseIcon" class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                </svg>
+                <!-- Play Icon (hidden by default) --><svg id="playIcon" class="w-5 h-5 text-white hidden" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            </button>
+        </main>
+    </div> <!-- End of wrapper --><!-- === NEW: 3 STEP GLOW ROUTINE SECTION === --><div class="px-4 md:px-6 mt-16 md:mt-24">
+        <section class="bg-gradient-to-br from-gradient-start to-gradient-end text-brand-green rounded-2xl py-16 px-6 md:px-12 lg:px-16">
+            <div class="container mx-auto">
+                <!-- Grid container for content --><div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+                    <!-- Left Column: Text Content --><div class="max-w-md">
+                        <h2 class="font-display text-7xl md:text-8xl font-light tracking-tight leading-none mb-6"> JOIN OUR GLOW ROUTINE</h2>
+                        <p class="text-base md:text-lg font-medium leading-relaxed mb-8">
+                             3 powerful steps—infused with botanical oils, vitamins, and antioxidants for deep hydration, barrier repair, and a radiant glow.
+                        </p>
+
+                        <!-- Features List --><div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+                            <ul class="space-y-3">
+                                <li class="flex items-center font-semibold">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke-width="2.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg>
+                                    High-Performance
+                                </li>
+                                <li class="flex items-center font-semibold">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke-width="2.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg>
+                                    Multi-Functional
+                                </li>
+                                <li class="flex items-center font-semibold">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke-width="2.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg>
+                                    Waterless Formulations
+                                </li>
+                                <li class="flex items-center font-semibold">
+                                    <svg class="w-5 h-5 mr-3 flex-shrink-0" fill="none" stroke-width="2.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg>
+                                    Naturally Effective Ingredients
+                                </li>
+                            </ul>
+
+                            <!-- AM/PM Block --><div class="flex items-center gap-4">
+                                <div class="text-center">
+                                    <p class="font-display text-5xl font-semibold leading-none">15+</p>
+                                    <p class="text-xs font-bold tracking-wider uppercase">Benefits in Every</p>
+                                    <p class="text-xs font-bold tracking-wider uppercase">Product</p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="font-display text-5xl font-semibold leading-none">AM/PM</p>
+                                    <p class="text-xs font-bold tracking-wider uppercase">Rituals in</p>
+                                    <p class="text-xs font-bold tracking-wider uppercase">One</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Image --><div>
+                        <!-- Reverted to local path -->
+                        <img src="3_Step_Glow_Routine_Products.png"
+                             alt="3 Step Glow Routine Products: Cleanse, Moisturize, Nourish"
+                             class="w-full h-auto rounded-lg">
+                    </div>
+                </div>
+
+                <!-- Button (Centered at bottom) --><div class="text-center mt-12 md:mt-16">
+                    <a href="#" class="inline-block py-3 px-8 bg-white/30 backdrop-blur-sm border border-brand-green text-brand-green rounded-full font-semibold tracking-wide uppercase text-sm hover:bg-white/50 transition-all duration-300">
+                        Buy the Bundle
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- === END: 3 STEP GLOW ROUTINE SECTION === --><!-- === BEST SELLERS SECTION (Title Removed) === --><section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6 md:px-10">
+            <!-- Section Title - REMOVED
+            <h2 class="font-display text-4xl md:text-5xl text-brand-green text-center mb-12 md:mb-16 font-semibold">
+                Shop our best sellers
+            </h2>
+            --><!-- Product Grid --><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Product 1: Golden Aura Body Oil - UPDATED STRUCTURE --><div class="flex flex-col h-full"> <!-- Main card container --><div class="bg-gray-100 rounded-xl overflow-hidden mb-4">
+                        <!-- Reverted to local path -->
+                        <img src="Golden_Aura_Body_Oil.png"
+                             alt="Golden Aura Body Oil"
+                             class="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <!-- Content wrapper --><div class="flex flex-col flex-grow text-center">
+                        <!-- Name/Price wrapper --><div class="flex justify-between items-start px-2 mb-3 flex-grow">
+                            <h3 class="text-base md:text-lg text-brand-green font-medium text-left">Golden Aura Body Oil</h3>
+                            <p class="text-base text-gray-800 font-semibold">$39</p>
+                        </div>
+                        <!-- Button - uses mt-auto to align to bottom --><a href="#" class="w-full inline-block bg-brand-green text-white rounded-full py-3 px-6 uppercase text-sm font-semibold tracking-wider hover:bg-opacity-90 transition-colors mt-auto">
+                            Quick Add
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 2: Rejuvenating Shea Body Butter - UPDATED STRUCTURE --><div class="flex flex-col h-full"> <!-- Main card container --><div class="bg-gray-100 rounded-xl overflow-hidden mb-4">
+                        <!-- Reverted to local path -->
+                        <img src="Shea_Body_Butter.png"
+                             alt="Rejuvenating Shea Body Butter"
+                             class="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <!-- Content wrapper --><div class="flex flex-col flex-grow text-center">
+                         <!-- Name/Price wrapper --><div class="flex justify-between items-start px-2 mb-3 flex-grow">
+                            <h3 class="text-base md:text-lg text-brand-green font-medium text-left">Rejuvenating Shea Body Butter</h3>
+                            <p class="text-base text-gray-800 font-semibold">$35</p>
+                        </div>
+                        <!-- Button - uses mt-auto to align to bottom --><a href="#" class="w-full inline-block bg-brand-green text-white rounded-full py-3 px-6 uppercase text-sm font-semibold tracking-wider hover:bg-opacity-90 transition-colors mt-auto">
+                            Quick Add
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 3: Revitalizing Mango Body Butter - UPDATED STRUCTURE --><div class="flex flex-col h-full"> <!-- Main card container --><div class="bg-gray-100 rounded-xl overflow-hidden mb-4">
+                        <!-- Reverted to local path -->
+                        <img src="Mango_Body_Butter.png"
+                             alt="Revitalizing Mango Body Butter"
+                             class="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <!-- Content wrapper --><div class="flex flex-col flex-grow text-center">
+                         <!-- Name/Price wrapper --><div class="flex justify-between items-start px-2 mb-3 flex-grow">
+                            <h3 class="text-base md:text-lg text-brand-green font-medium text-left">Revitalizing Mango Body Butter</h3>
+                            <p class="text-base text-gray-800 font-semibold">$35</p>
+                        </div>
+                        <!-- Button - uses mt-auto to align to bottom --><a href="#" class="w-full inline-block bg-brand-green text-white rounded-full py-3 px-6 uppercase text-sm font-semibold tracking-wider hover:bg-opacity-90 transition-colors mt-auto">
+                            Quick Add
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product 4: Renewal Elixir Face Oil - UPDATED STRUCTURE --><div class="flex flex-col h-full"> <!-- Main card container --><div class="bg-gray-100 rounded-xl overflow-hidden mb-4">
+                        <!-- Reverted to local path -->
+                        <img src="Elixir_Face_Oil.png"
+                             alt="Renewal Elixir Face Oil"
+                             class="w-full h-auto object-cover aspect-[4/5] hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <!-- Content wrapper --><div class="flex flex-col flex-grow text-center">
+                         <!-- Name/Price wrapper --><div class="flex justify-between items-start px-2 mb-3 flex-grow">
+                            <h3 class="text-base md:text-lg text-brand-green font-medium text-left">Renewal Elixir Face Oil</h3>
+                            <p class="text-base text-gray-800 font-semibold">$45</p>
+                        </div>
+                        <!-- Button - uses mt-auto to align to bottom --><a href="#" class="w-full inline-block bg-brand-green text-white rounded-full py-3 px-6 uppercase text-sm font-semibold tracking-wider hover:bg-opacity-90 transition-colors mt-auto">
+                            Quick Add
+                        </a>
+                    </div>
+                </div>
+
+            </div> <!-- End Product Grid --></div> <!-- End Container --></section>
+    <!-- === END: BEST SELLERS SECTION === --><!-- JavaScript for Play/Pause Toggle --><script>
+        const video = document.getElementById('heroVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const playIcon = document.getElementById('playIcon');
+
+        // Check if elements exist before adding listener
+        if (video && playPauseBtn && pauseIcon && playIcon) {
+            playPauseBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    pauseIcon.classList.remove('hidden');
+                    playIcon.classList.add('hidden');
+                } else {
+                    video.pause();
+                    pauseIcon.classList.add('hidden');
+                    playIcon.classList.remove('hidden');
+                }
+            });
+        }
+
+        // --- NEW SCRIPT FOR STICKY HEADER ANIMATION ---
+        const header = document.getElementById('stickyHeader');
+        const navContainer = document.getElementById('navContainer');
+        const nav = document.getElementById('mainNav');
+        const heroWrapper = document.getElementById('heroWrapper'); // Get hero wrapper
+
+        // We use a small threshold to detect scroll
+        const scrollThreshold = 10;
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > scrollThreshold) {
+                // --- EXPANDED STATE ---
+                // Header expands to full width by removing its padding and changing top offset
+                header.classList.remove('px-4', 'md:px-6', 'py-4', 'top-4');
+                header.classList.add('top-0'); // Stick to top, remove vertical padding
+
+                // Nav container expands to full width by removing container/padding
+                navContainer.classList.remove('container', 'mx-auto', 'px-6', 'md:px-10');
+
+                // Nav loses its rounded corners AND shrinks vertical padding
+                nav.classList.remove('rounded-full', 'py-3');
+                nav.classList.add('rounded-none', 'py-2'); // Explicitly set to sharp corners and smaller padding
+
+                // Hero wrapper's negative margin is reduced
+                heroWrapper.classList.remove('-mt-24');
+                heroWrapper.classList.add('-mt-10'); // -2.5rem, calculated to match new header height
+            } else {
+                // --- INSET STATE (Default) ---
+                // Header gets its padding and top offset back
+                header.classList.add('px-4', 'md:px-6', 'py-4', 'top-4');
+                header.classList.remove('top-0'); // Remove only top-0
+
+                // Nav container gets its container/padding back
+                navContainer.classList.add('container', 'mx-auto', 'px-6', 'md:px-10');
+
+                // Nav gets its rounded corners and padding back
+                nav.classList.add('rounded-full', 'py-3');
+                nav.classList.remove('rounded-none', 'py-2');
+
+                // Hero wrapper's original negative margin is restored
+                heroWrapper.classList.remove('-mt-10');
+                heroWrapper.classList.add('-mt-24');
+            }
+        });
+        // --- END OF NEW SCRIPT ---
+    </script>
+
+</body>
+</html>
