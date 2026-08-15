@@ -5,18 +5,83 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  @font-face {
+    font-family: 'Cormorant Bundle';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('https://fonts.gstatic.com/s/cormorantgaramond/v21/co3hmX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86eHjmeyOkkv20ULzqxhhXP9yI5uY2.woff2') format('woff2');
+  }
   #shopify-section-{{ section.id }} {
     scroll-behavior: smooth;
+  }
+  .bundle-page-wrap h1,
+  .bundle-page-wrap h2,
+  .bundle-page-wrap h3 {
+    font-family: 'Cormorant Bundle', 'Cormorant Garamond', serif !important;
+  }
+  .bundle-page-wrap h1 {
+    font-weight: 400 !important;
+    font-variation-settings: 'wght' 400;
+  }
+  .bundle-page-wrap h2,
+  .bundle-page-wrap h3 {
+    font-weight: 600 !important;
+    font-variation-settings: 'wght' 600;
   }
   /* Locks width/display explicitly — Tailwind's utility classes never set `width`
      on this button, so a theme-wide `button { width: 100% }` mobile rule (common
      in Shopify themes) would otherwise apply unopposed and blow up the sticky bar. */
   #bundle-cta {
-    display: inline-flex !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: auto !important;
-    flex: 0 0 auto !important;
+    width: 100% !important;
+    flex: none !important;
+  }
+  @media (min-width: 768px) {
+    #bundle-cta {
+      display: inline-flex !important;
+      width: auto !important;
+      flex: 0 0 auto !important;
+    }
+  }
+  .bundle-slot-photo {
+    width: 130%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    object-position: right center;
+  }
+  @media (min-width: 768px) {
+    .bundle-slot-photo {
+      width: 115%;
+      height: 115%;
+      object-position: center;
+    }
+  }
+  .bundle-slot-num {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    z-index: 20;
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background: #1F4C35;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  }
+  @media (min-width: 768px) {
+    .bundle-slot-num {
+      width: 20px;
+      height: 20px;
+    }
   }
 </style>
 
@@ -39,20 +104,20 @@
 {% comment %} Tailwind is used for all utility classes below. Skip this tag if the theme already loads Tailwind elsewhere on the page. {% endcomment %}
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div class="bundle-page-wrap section-{{ section.id }}-padding bg-white pb-20 md:pb-24">
+<div class="bundle-page-wrap section-{{ section.id }}-padding bg-white pb-36 md:pb-24">
 
     <!-- Hero Section --><section class="relative w-full bg-[#F2EFE6] overflow-hidden">
-        <div class="relative w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-2 justify-between px-6 md:px-12 py-10 md:py-14 lg:py-16">
-            <div class="w-full max-w-[760px] lg:ml-[55px]" style="font-family:'DM Sans', sans-serif;">
+        <div class="relative w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-2 justify-between px-6 md:px-12 lg:px-6 py-10 md:py-14 lg:py-16">
+            <div class="w-full max-w-[760px] lg:ml-[13.75px]" style="font-family:'DM Sans', sans-serif;">
                 <h1 class="text-[#1F4C35] font-normal text-5xl md:text-7xl lg:text-8xl" style="font-family:'Cormorant Garamond', serif; line-height:1.02; letter-spacing:-0.02em;">
                     Build Your<br>Own Bundle
                 </h1>
                 <p class="mt-3 text-[#1F4C35] font-medium text-xl md:text-2xl lg:text-3xl" style="line-height:1.7;">
-                    Choose 2+ products to<br>unlock <span class="font-bold">15% off</span>.
+                    Choose 3+ products to<br>unlock <span class="font-bold">20% off</span>.
                 </p>
             </div>
 
-            <!-- Product Photo Card --><div class="relative w-full max-w-[420px] md:max-w-[540px] lg:max-w-none lg:w-[720px] flex-shrink-0 lg:mr-[65px]">
+            <!-- Product Photo Card --><div class="relative w-full max-w-[357px] md:max-w-[459px] lg:max-w-none lg:w-[612px] flex-shrink-0 lg:mr-[16.25px]">
                 <!-- Soft cast shadow behind the card -->
                 <div class="absolute left-1/2 -translate-x-1/2 bottom-0 w-[80%] h-10 md:h-14 bg-[#1F4C35]/25 blur-2xl rounded-full" aria-hidden="true"></div>
 
@@ -77,7 +142,7 @@
         <!-- Banner -->
         <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636615/euphoriel/cleanse.png');">
             <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 1</p>
-            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Cleanse</h2>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Cleanse</h2>
         </div>
 
         <!-- Product Grid -->
@@ -94,7 +159,7 @@
                         <span class="text-gray-500 text-sm">(96)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Radiance Ritual Shower Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Radiance Ritual Shower Oil</h3>
                         <p class="hidden">$34.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Cleanses And Conditions In One Step</p>
@@ -110,7 +175,7 @@
         <!-- Banner -->
         <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636616/euphoriel/moisture.png');">
             <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 2</p>
-            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Moisturize</h2>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Moisturize</h2>
         </div>
 
         <!-- Product Grid -->
@@ -127,7 +192,7 @@
                         <span class="text-gray-500 text-sm">(68)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Rejuvenating Shea Body Butter</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Rejuvenating Shea Body Butter</h3>
                         <p class="hidden">$29.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Very Dry, Rough Skin</p>
@@ -144,7 +209,7 @@
                         <span class="text-gray-500 text-sm">(102)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Revitalizing Mango Body Butter</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Revitalizing Mango Body Butter</h3>
                         <p class="hidden">$29.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Normal To Dry Skin</p>
@@ -161,7 +226,7 @@
                         <span class="text-gray-500 text-sm">(85)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Golden Aura Body Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Golden Aura Body Oil</h3>
                         <p class="hidden">$31.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Dry, Sensitive Skin</p>
@@ -177,7 +242,7 @@
         <!-- Banner -->
         <div class="w-full h-32 md:h-40 lg:h-[165px] flex flex-col items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://res.cloudinary.com/s1km9nr7/image/upload/v1785636618/euphoriel/nourish.png');">
             <p class="text-[#1F4C35] text-sm md:text-base uppercase mb-2" style="font-family:'DM Sans', sans-serif; font-weight:600; letter-spacing:0.22em;">Step 3</p>
-            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif;">Nourish</h2>
+            <h2 class="text-[#1F4C35] text-3xl md:text-5xl lg:text-6xl font-semibold" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Nourish</h2>
         </div>
 
         <!-- Product Grid -->
@@ -194,7 +259,7 @@
                         <span class="text-gray-500 text-sm">(123)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Renewal Elixir Face Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Renewal Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">Deep Hydration, Visible Glow</p>
@@ -211,7 +276,7 @@
                         <span class="text-gray-500 text-sm">(107)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Balance Elixir Face Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Balance Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Oily, Blemish-Prone Skin</p>
@@ -228,7 +293,7 @@
                         <span class="text-gray-500 text-sm">(90)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Harmonic Elixir Face Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Harmonic Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Combination Skin</p>
@@ -245,7 +310,7 @@
                         <span class="text-gray-500 text-sm">(64)</span>
                     </div>
                     <div class="mb-1">
-                        <h3 class="text-sm font-bold md:text-lg md:font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif;">Timeless Elixir Face Oil</h3>
+                        <h3 class="text-sm md:text-lg font-semibold text-[#1F4C35]" style="font-family:'Cormorant Garamond', serif; font-weight:600;">Timeless Elixir Face Oil</h3>
                         <p class="hidden">$39.99 CAD</p>
                     </div>
                     <p class="text-xs md:text-sm text-gray-500 mb-3 flex-grow line-clamp-2">For Mature, Aging Skin</p>
@@ -257,21 +322,20 @@
     </section>
 
     <!-- ===================== STICKY BUNDLE BAR ===================== -->
-    <div id="bundle-bar" class="fixed bottom-0 left-0 w-full bg-[#F2EFE6] border-t border-[#1F4C35]/15 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
-        <div class="flex items-center justify-between gap-3 md:gap-6 px-4 md:px-8 lg:px-12 py-3 md:py-4 max-w-[1440px] mx-auto">
+    <div id="bundle-bar" class="fixed bottom-0 left-0 w-full bg-[#F2EFE6] z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+        <div class="flex flex-col gap-2 px-3 py-3 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 lg:px-12 md:py-4 max-w-[1440px] mx-auto">
 
-            <!-- Slots -->
-            <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
-                <div id="bundle-slot-1" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center"></div>
-                <div id="bundle-slot-2" class="bundle-slot group relative w-12 h-12 md:w-16 md:h-16 rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+            <div class="flex gap-1.5 md:gap-3 flex-shrink-0 ml-8 md:ml-10">
+                <div id="bundle-slot-1" class="bundle-slot group relative w-[60px] h-[60px] md:w-[79px] md:h-[79px] rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+                <div id="bundle-slot-2" class="bundle-slot group relative w-[60px] h-[60px] md:w-[79px] md:h-[79px] rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+                <div id="bundle-slot-3" class="bundle-slot group relative w-[60px] h-[60px] md:w-[79px] md:h-[79px] rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
+                <div id="bundle-slot-4" class="bundle-slot group relative w-[60px] h-[60px] md:w-[79px] md:h-[79px] rounded-lg bg-[#C5DBC3]/40 border border-[#1F4C35]/15 flex items-center justify-center text-center"></div>
             </div>
 
-            <!-- Center label -->
             <p class="hidden md:block flex-1 text-center text-[#1F4C35] text-base md:text-lg font-semibold" style="font-family:'DM Sans', sans-serif;">Build Your Own Bundle</p>
 
-            <!-- CTA -->
-            <button id="bundle-cta" type="button" class="flex-shrink-0 bg-[#1F4C35] text-white rounded-full px-5 md:px-8 py-3 text-xs md:text-sm font-semibold uppercase whitespace-nowrap" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;">
-                Add 2 items to start
+            <button id="bundle-cta" type="button" class="w-full bg-[#1F4C35] text-white py-3.5 px-4 text-sm font-semibold text-center md:w-auto md:rounded-full md:px-8 md:py-3 md:text-sm md:whitespace-nowrap" style="font-family:'DM Sans', sans-serif;">
+                Add 2 items to unlock savings
             </button>
         </div>
     </div>
@@ -281,8 +345,14 @@
 <script>
     (function () {
         const BUNDLE_KEY  = 'euphorielBundle';
-        const MAX_SLOTS   = 2;
+        const MAX_SLOTS   = 4;
         const DISCOUNT_AT = 2;
+
+        function discountRate(count) {
+            if (count >= 3) return 0.20;
+            if (count >= 2) return 0.15;
+            return 0;
+        }
 
         function getBundle() {
             try { return JSON.parse(localStorage.getItem(BUNDLE_KEY)) || []; }
@@ -293,9 +363,18 @@
             localStorage.setItem(BUNDLE_KEY, JSON.stringify(items));
         }
 
+        function parsePrice(str) {
+            const match = String(str || '').replace(/,/g, '').match(/[\d.]+/);
+            return match ? parseFloat(match[0]) : 0;
+        }
+
+        function formatMoney(amount) {
+            return '$' + Math.round(amount);
+        }
+
         function slotPlaceholder(n) {
-            const labels = { 2: 'Unlock<br>15% Off' };
-            const badge  = `<span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center shadow-sm">${n}</span>`;
+            const labels = { 2: 'Unlock<br>15% Off', 3: 'Unlock<br>20% Off' };
+            const badge  = `<span class="bundle-slot-num">${n}</span>`;
             const label  = labels[n]
                 ? `<span class="text-[#1F4C35] text-[10px] md:text-xs font-semibold leading-tight px-1">${labels[n]}</span>`
                 : '';
@@ -311,11 +390,11 @@
 
                 if (items[i]) {
                     slot.innerHTML = `
-                        <span class="absolute -top-1.5 -left-1.5 w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#1F4C35] text-white text-[10px] font-bold flex items-center justify-center z-10 shadow-sm">${i + 1}</span>
+                        <span class="bundle-slot-num">${i + 1}</span>
                         <span class="bundle-remove absolute inset-1.5 rounded-md bg-black/0 group-hover:bg-black/50 flex items-center justify-center cursor-pointer transition-colors duration-200 z-10" data-index="${i}" aria-label="Remove ${items[i].name}">
                             <span class="text-white text-base md:text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-200">&times;</span>
                         </span>
-                        <img src="${items[i].img}" alt="${items[i].name}" class="w-full h-full object-contain p-1.5">
+                        <img src="${items[i].img}" alt="${items[i].name}" class="bundle-slot-photo">
                         <span class="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap bg-[#1F4C35] text-white text-[10px] md:text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20">${items[i].name}</span>
                     `;
                 } else {
@@ -334,17 +413,22 @@
             });
 
             const cta = document.getElementById('bundle-cta');
-            const ready = items.length >= DISCOUNT_AT;
+            const remaining = DISCOUNT_AT - items.length;
+            const ready = remaining <= 0;
+
+            cta.style.letterSpacing = ready ? '0.13em' : '0.02em';
+            cta.style.textTransform = ready ? 'uppercase' : 'none';
+
             if (items.length === 0) {
-                cta.textContent = 'Add 2 items to start';
+                cta.textContent = 'Add 2 items to unlock savings';
             } else if (!ready) {
-                const remaining = DISCOUNT_AT - items.length;
-                cta.textContent = `Add ${remaining} more to unlock 15%`;
+                cta.textContent = `Add ${remaining} more item${remaining === 1 ? '' : 's'} to unlock savings`;
             } else {
-                cta.textContent = 'Add to Cart';
+                const subtotal = items.reduce((sum, item) => sum + parsePrice(item.price), 0);
+                const discounted = subtotal * (1 - discountRate(items.length));
+                cta.innerHTML = `<span class="line-through opacity-70 mr-1">${formatMoney(subtotal)}</span> ${formatMoney(discounted)} — Add to Cart`;
             }
             cta.disabled = !ready;
-            cta.classList.toggle('opacity-50', !ready);
             cta.classList.toggle('cursor-not-allowed', !ready);
         }
 
@@ -401,7 +485,6 @@
             }
 
             const cta = this;
-            const originalText = cta.textContent;
             cta.disabled = true;
             cta.textContent = 'Adding to cart…';
 
@@ -417,8 +500,7 @@
                 window.location.href = '/cart';
             } catch (err) {
                 console.error('Add to cart failed:', err);
-                cta.disabled = false;
-                cta.textContent = originalText;
+                renderBundleBar();
                 alert('Something went wrong adding your bundle to the cart. Please try again.');
             }
         });
