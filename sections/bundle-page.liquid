@@ -59,6 +59,11 @@
       width: auto !important;
     }
   }
+  /* An added ("Added") card button must not look or act clickable. */
+  .bundle-page-wrap .add-to-bundle-btn:disabled,
+  .bundle-page-wrap .add-to-bundle-btn[disabled] {
+    cursor: not-allowed !important;
+  }
   /* Theme image/card rules must not restyle filled slots into white shadowed tiles. */
   .bundle-slot {
     background: rgba(197, 219, 195, 0.4) !important;
@@ -471,6 +476,17 @@
                     saveBundle(items);
                     renderBundleBar();
                 });
+            });
+
+            // Cards whose product is already in the bundle show "Added" and stop
+            // accepting clicks; removing the item from a slot re-enables them
+            document.querySelectorAll('.add-to-bundle-btn').forEach(btn => {
+                const added = items.some(i => i.name === btn.dataset.name);
+                btn.disabled = added;
+                btn.textContent = added ? 'Added' : 'Add to Bundle';
+                btn.style.setProperty('cursor', added ? 'not-allowed' : 'pointer', 'important');
+                btn.classList.toggle('opacity-60', added);
+                btn.classList.toggle('hover:bg-opacity-90', !added);
             });
 
             const cta = document.getElementById('bundle-cta');
