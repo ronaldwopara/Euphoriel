@@ -499,6 +499,26 @@
     {%- endfor %}
   };
 
+  // Image URLs for face oils (Full Size vs Travel Size)
+  const PRODUCT_IMAGES = {
+    'renewal-elixir-face-oil': {
+      full: 'https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141',
+      travel: 'https://res.cloudinary.com/dyhflagbc/image/upload/v1787329244/Copy_of_Renewal_Elixir_Face_Oil-02.png_rivung.webp'
+    },
+    'timeless-elixir-face-oil': {
+      full: 'https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401',
+      travel: 'https://res.cloudinary.com/dyhflagbc/image/upload/v1787329435/Copy_of_Timeless_Elixir_Face_Oil-02.png_wmabwx.webp'
+    },
+    'harmonic-elixir-face-oil': {
+      full: 'https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215',
+      travel: 'https://res.cloudinary.com/dyhflagbc/image/upload/v1787329501/Copy_of_Harmonic_Elixir_Face_Oil-02.png_fn8vis.webp'
+    },
+    'balance-elixir-face-oil': {
+      full: 'https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125',
+      travel: 'https://res.cloudinary.com/dyhflagbc/image/upload/v1787329557/Copy_of_Balance_Elixir_Face_Oil-02.png-2_m8pbw6.webp'
+    }
+  };
+
   // CSS
   const style = document.createElement('style');
   style.textContent = `
@@ -638,6 +658,17 @@
             btn.classList.remove('loading');
             btn.classList.add('active');
             otherBtn.classList.remove('active');
+
+            // Swap product image if this product has different images per size
+            const images = PRODUCT_IMAGES[handle];
+            if (images) {
+              const isTravel = btn === travelBtn;
+              const newImgUrl = isTravel ? images.travel : images.full;
+              const imgEl = el.querySelector('img');
+              if (imgEl) {
+                imgEl.src = newImgUrl;
+              }
+            }
 
             // Update price displays
             el.querySelectorAll('[class*="price"]').forEach(p => {
