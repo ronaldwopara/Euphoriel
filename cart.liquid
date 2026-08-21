@@ -40,7 +40,7 @@
 {%- endstyle -%}
 
 {%- if cart_items contains '<p class="hidden" data-out-of-stock-title>' -%}
-  {%- assign out_of_stock_product_title = cart_items | split: '<p class="hide hidden" data-out-of-stock-title>' | last | split: '</p>' | first -%}
+  {%- assign out_of_stock_product_title = cart_items | split: '<p class="hidden" data-out-of-stock-title>' | last | split: '</p>' | first -%}
 
   <script>
     window.theme.outOfStockProductTitle = {{ out_of_stock_product_title | json }};
