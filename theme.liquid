@@ -370,16 +370,11 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
       .cart-size-toggle-btn.active.loading::after { border-color: white; border-right-color: transparent; }
       @keyframes cartSpin { to { transform: rotate(360deg); } }
       [data-size-toggle-processed] [class*="variant"], [data-size-toggle-processed] [class*="option"]:not(.cart-size-toggle):not(.cart-size-toggle-btn), [data-size-toggle-processed] .cart__item__option { display: none !important; }
-      .cart__total, .cart__discounts .cart__total { font-size: 1.1em; }
-      .cart__checkout { font-size: 1.05em; letter-spacing: 0.08em; }
+      [data-cart-items-total] { text-decoration: line-through; opacity: 0.6; }
     `;
     document.head.appendChild(style);
 
-    const formatMoney = (cents) => {
-      const format = window.theme?.moneyWithCurrencyFormat || '${{amount}} CAD';
-      const amount = (cents / 100).toFixed(2);
-      return format.replace('{{amount}}', amount).replace('{{amount_with_comma_separator}}', amount.replace('.', ','));
-    };
+    const formatMoney = (cents) => '$' + (cents / 100).toFixed(2);
 
     function init() {
       document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]').forEach(el => {
@@ -441,9 +436,13 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
                 }
               }
               
-              // Update line item price
-              const priceEl = el.querySelector('.cart__item__price, [class*="item__price"]');
-              if (priceEl) priceEl.textContent = formatMoney(variant.price);
+              // Update line item price (unit price * quantity)
+              const priceEls = el.querySelectorAll('[class*="price"], .money');
+              priceEls.forEach(p => {
+                if (p.textContent.includes('$') && !p.closest('.cart__total')) {
+                  p.textContent = formatMoney(variant.price * item.quantity);
+                }
+              });
               
               // Fetch updated cart totals
               const newCart = await (await fetch('/cart.js')).json();
@@ -463,17 +462,21 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
               if (totalMoney) {
                 const strike = totalMoney.querySelector('.cart__total__strike');
                 if (strike) strike.textContent = formatMoney(newCart.original_total_price);
-                // Update the text node (actual subtotal)
+                // Update the text node (actual subtotal) - replace only the price portion
                 totalMoney.childNodes.forEach(node => {
                   if (node.nodeType === 3 && node.textContent.includes('$')) {
-                    node.textContent = ' ' + formatMoney(newCart.total_price) + ' CAD';
+                    node.textContent = node.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
                   }
                 });
               }
               
-              // Update checkout button
+              // Update checkout button - preserve bullet separator if present
               document.querySelectorAll('.cart__checkout, button[name="checkout"]').forEach(e => {
-                e.textContent = e.textContent.replace(/[\$€£¥][\d,.]+\s*[A-Z]{0,3}/, formatMoney(newCart.total_price));
+                const text = e.textContent;
+                if (text.includes('$')) {
+                  // Replace just the price, preserving everything else (bullet, spacing, currency code)
+                  e.textContent = text.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
+                }
               });
             }
           } catch (e) { console.error('Switch error:', e); btn.classList.remove('loading'); }
