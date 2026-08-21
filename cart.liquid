@@ -646,10 +646,24 @@
               }
             });
 
-            // Update totals
+            // Update totals - struck-out (original) and actual subtotal
             const newCart = await (await fetch('/cart.js')).json();
+            
+            // Update struck-out original price
+            document.querySelectorAll('.cart__total__strike').forEach(el => {
+              el.textContent = el.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.original_total_price));
+            });
+            
+            // Update actual subtotal - find the text node directly in the container (not in child spans)
             document.querySelectorAll('[data-cart-total-price], .cart__total__money').forEach(t => {
-              t.innerHTML = t.innerHTML.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
+              // Update all text nodes containing prices
+              const walker = document.createTreeWalker(t, NodeFilter.SHOW_TEXT, null, false);
+              let node;
+              while (node = walker.nextNode()) {
+                if (/\$[\d,.]+/.test(node.textContent) && !node.parentElement.classList.contains('cart__total__strike')) {
+                  node.textContent = node.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
+                }
+              }
             });
           }
         } catch (e) {
