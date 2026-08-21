@@ -536,8 +536,8 @@
       padding: 6px 8px;
       border-radius: 9999px;
       border: 1px solid #1F4C35 !important;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      cursor: pointer !important;
+      transition: background-color 0.15s ease, color 0.15s ease;
       white-space: nowrap;
       -webkit-appearance: none;
       line-height: 1;
@@ -552,11 +552,12 @@
     }
     .cart-size-toggle-btn:disabled {
       opacity: 0.6;
-      cursor: pointer;
+      cursor: pointer !important;
     }
     .cart-size-toggle-btn.loading {
       color: transparent !important;
       position: relative;
+      cursor: pointer !important;
     }
     .cart-size-toggle-btn.loading::after {
       content: '';
