@@ -98,8 +98,8 @@
 <div class="bundle-page-wrap section-{{ section.id }}-padding bg-white pb-36 md:pb-24">
 
     <!-- Hero Section --><section class="relative w-full bg-[#F2EFE6] overflow-hidden">
-        <div class="relative w-full flex flex-col lg:flex-row items-center gap-8 lg:gap-2 justify-between px-6 md:px-12 lg:px-6 py-10 md:py-14 lg:py-16">
-            <div class="w-full max-w-[760px] lg:ml-[13.75px]" style="font-family:'DM Sans', sans-serif;">
+        <div class="relative w-full max-w-[1300px] mx-auto flex flex-col lg:flex-row items-center gap-[24px] lg:gap-[8px] px-6 md:px-12 lg:px-6 py-10 md:py-14 lg:py-16" style="justify-content: center !important;">
+            <div class="w-full max-w-[680px]" style="font-family:'DM Sans', sans-serif;">
                 <h1 class="text-[#1F4C35] font-normal text-5xl md:text-7xl lg:text-8xl" style="font-family:'Cormorant Garamond', serif; line-height:1.02; letter-spacing:-0.02em;">
                     Build Your<br>Own Bundle
                 </h1>
@@ -108,11 +108,11 @@
                 </p>
             </div>
 
-            <!-- Product Photo Card --><div class="relative w-full max-w-[357px] md:max-w-[459px] lg:max-w-none lg:w-[612px] flex-shrink-0 lg:mr-[16.25px]">
+            <!-- Product Photo Card --><div class="relative w-full max-w-[357px] md:max-w-[459px] lg:max-w-none lg:w-[612px] flex-shrink-0">
                 <!-- Soft cast shadow behind the card -->
                 <div class="absolute left-1/2 -translate-x-1/2 bottom-0 w-[80%] h-10 md:h-14 bg-[#1F4C35]/25 blur-2xl rounded-full" aria-hidden="true"></div>
 
-                <div class="relative aspect-square overflow-hidden ring-1 ring-[#1F4C35]/10 shadow-[0_25px_50px_-20px_rgba(31,76,53,0.35)]">
+                <div class="relative aspect-square overflow-hidden rounded-xl ring-1 ring-[#1F4C35]/10 shadow-[0_25px_50px_-20px_rgba(31,76,53,0.35)]">
                     <img src="https://res.cloudinary.com/s1km9nr7/image/upload/v1785638583/euphoriel/3_Step_Glow_Routine_Products.avif" alt="" class="w-full h-full object-contain" style="filter: sepia(10%) saturate(118%) brightness(103%) contrast(101%);">
 
                     <!-- Vignette to soften the flat "sticker" edges -->
@@ -148,9 +148,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" alt="Radiance Ritual Shower Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" alt="Radiance Ritual Shower Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Radiance Ritual Shower Oil</h3>
@@ -160,8 +160,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (8.4oz | 250ml), Travel Size (3.4oz | 100ml)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Radiance Ritual Shower Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Radiance_Ritual_Shower_Oil-01.png?v=1746183686" data-price="${{ bp_full.price | money_without_currency }} CAD" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -191,9 +191,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | NOURISHING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" alt="Rejuvenating Shea Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | NOURISHING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" alt="Rejuvenating Shea Body Butter" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Rejuvenating Shea Body Butter</h3>
@@ -203,8 +203,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (4oz | 120g), Travel Size (2oz | 60g)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Rejuvenating Shea Body Butter" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Rejuvenating_Shea_Body_Butter-01.png?v=1746113335" data-price="${{ bp_full.price | money_without_currency }} CAD" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -218,9 +218,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | NOURISHING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" alt="Revitalizing Mango Body Butter" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | NOURISHING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" alt="Revitalizing Mango Body Butter" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Revitalizing Mango Body Butter</h3>
@@ -230,8 +230,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (4oz | 120g), Travel Size (2oz | 60g)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Revitalizing Mango Body Butter" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Revitalizing_Mango_Body_Butter-01.png?v=1746183532" data-price="${{ bp_full.price | money_without_currency }} CAD" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -245,9 +245,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | GLOW ENHANCING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" alt="Golden Aura Body Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | GLOW ENHANCING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" alt="Golden Aura Body Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Golden Aura Body Oil</h3>
@@ -257,8 +257,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (3.4oz | 100ml), Travel Size (1.7oz | 50ml)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Golden Aura Body Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Golden_Aura_Body_Oil-01.png?v=1746183621" data-price="${{ bp_full.price | money_without_currency }} CAD" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -288,9 +288,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" alt="Renewal Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" alt="Renewal Elixir Face Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Renewal Elixir Face Oil</h3>
@@ -300,8 +300,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Renewal Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Renewal_Elixir_Face_Oil-01.png?v=1746183141" data-price="${{ bp_full.price | money_without_currency }} CAD" data-face-key="renewal" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -315,9 +315,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | CLARIFYING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" alt="Balance Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | CLARIFYING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" alt="Balance Elixir Face Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Balance Elixir Face Oil</h3>
@@ -327,8 +327,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Balance Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Balance_Elixir_Face_Oil-01.png?v=1746183125" data-price="${{ bp_full.price | money_without_currency }} CAD" data-face-key="balance" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -342,9 +342,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | BALANCING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt="Harmonic Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | BALANCING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" alt="Harmonic Elixir Face Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Harmonic Elixir Face Oil</h3>
@@ -354,8 +354,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Harmonic Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Harmonic_Elixir_Face_Oil-01.png?v=1746183215" data-price="${{ bp_full.price | money_without_currency }} CAD" data-face-key="harmonic" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -369,9 +369,9 @@
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
                 <div class="flex flex-col h-full">
-                    <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
-                        <span class="absolute top-2 left-2 z-10 inline-block max-w-[88%] bg-[#E4ED72] text-[#1F2937] text-[9px] md:text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full leading-tight" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | FIRMING</span>
-                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" alt="Timeless Elixir Face Oil" class="w-full h-full object-contain p-1 hover:scale-105 transition-transform duration-300">
+                    <div class="relative overflow-hidden rounded-xl mb-3 aspect-[4/5] bg-white flex items-start justify-center">
+                        <span class="bundle-badge absolute top-3 left-3 z-10 inline-block max-w-[calc(100%-1.5rem)] overflow-hidden bg-[#E4ED72] text-[#1F2937] whitespace-nowrap text-xs font-bold uppercase tracking-wide px-3 py-2 rounded-full leading-tight w-max" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | FIRMING</span>
+                        <img src="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" alt="Timeless Elixir Face Oil" class="w-full h-full object-contain p-1">
                     </div>
                     <div class="mb-1">
                         <h3 class="bundle-product-title text-lg md:text-2xl font-bold text-[#1F4C35]" style="font-weight:700;">Timeless Elixir Face Oil</h3>
@@ -381,8 +381,8 @@
                     <div class="mb-3 flex-grow">
                         <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
-                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
-                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1px solid #1F4C35 !important;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full.title }}</button>
+                            <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif; border: 1.5px solid #1F4C35 !important;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel.title }}</button>
                         </div>
                     </div>
                     <button type="button" class="add-to-bundle-btn w-full text-center inline-block bg-[#1F4C35] text-white rounded-full py-2.5 md:py-3 px-4 md:px-6 uppercase text-xs md:text-sm font-semibold hover:bg-opacity-90 transition-colors mt-auto" style="font-family:'DM Sans', sans-serif; letter-spacing:0.13em;" data-name="Timeless Elixir Face Oil" data-img="https://cdn.shopify.com/s/files/1/0861/2062/8566/files/Copy_of_Timeless_Elixir_Face_Oil-01.png?v=1746183401" data-price="${{ bp_full.price | money_without_currency }} CAD" data-face-key="timeless" data-variant-id="{{ bp_full.id }}">Add to Bundle</button>
@@ -531,11 +531,13 @@
             group.querySelectorAll('.size-toggle-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     group.querySelectorAll('.size-toggle-btn').forEach(b => {
-                        b.classList.remove('bg-[#1F4C35]', 'text-white', 'border-[#1F4C35]');
-                        b.classList.add('bg-white', 'text-[#1F4C35]', 'border-[#1F4C35]/30');
+                        b.classList.remove('bg-[#1F4C35]', 'text-white');
+                        b.classList.add('bg-white', 'text-[#1F4C35]');
+                        b.style.setProperty('border', '1.5px solid #1F4C35', 'important');
                     });
-                    btn.classList.remove('bg-white', 'text-[#1F4C35]', 'border-[#1F4C35]/30');
-                    btn.classList.add('bg-[#1F4C35]', 'text-white', 'border-[#1F4C35]');
+                    btn.classList.remove('bg-white', 'text-[#1F4C35]');
+                    btn.classList.add('bg-[#1F4C35]', 'text-white');
+                    btn.style.setProperty('border', '1px solid #1F4C35', 'important');
 
                     if (addBtn) {
                         addBtn.dataset.variantId = btn.dataset.variantId;
@@ -609,6 +611,36 @@
         // Re-render against the current (now-cleared) bundle state to reset it.
         window.addEventListener('pageshow', function (event) {
             if (event.persisted) renderBundleBar();
+        });
+
+        // Badges must never wrap — instead, shrink font-size just enough for the
+        // longest badge to fit on one line, and apply that same size to every
+        // badge so they all stay visually uniform.
+        function fitBadges() {
+            const badges = document.querySelectorAll('.bundle-badge');
+            if (!badges.length) return;
+
+            const baseSize = parseFloat(getComputedStyle(badges[0]).fontSize);
+            badges.forEach(b => { b.style.fontSize = baseSize + 'px'; });
+
+            let minScale = 1;
+            badges.forEach(b => {
+                if (b.scrollWidth > b.clientWidth) {
+                    minScale = Math.min(minScale, b.clientWidth / b.scrollWidth);
+                }
+            });
+
+            if (minScale < 1) {
+                const newSize = Math.floor(baseSize * minScale * 100) / 100;
+                badges.forEach(b => { b.style.fontSize = newSize + 'px'; });
+            }
+        }
+
+        window.addEventListener('load', fitBadges);
+        let badgeResizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(badgeResizeTimer);
+            badgeResizeTimer = setTimeout(fitBadges, 150);
         });
     })();
 </script>
