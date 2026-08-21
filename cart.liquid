@@ -474,49 +474,16 @@
 <script>
 // Cart Size Toggle - allows users to switch between Full Size and Travel Size variants
 (function() {
-  // Product variant mapping - maps product handles to their variant IDs
-  // This data comes from the same products used in the bundle page
+  // Product variant mapping
   const PRODUCT_VARIANTS = {
-    'radiance-ritual-shower-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Radiance Ritual Shower Oil'
-    },
-    'rejuvenating-shea-body-butter': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Rejuvenating Shea Body Butter'
-    },
-    'revitalizing-mango-body-butter': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Revitalizing Mango Body Butter'
-    },
-    'golden-aura-body-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Golden Aura Body Oil'
-    },
-    'balance-elixir-face-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Balance Elixir Face Oil'
-    },
-    'timeless-elixir-face-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Timeless Elixir Face Oil'
-    },
-    'renewal-elixir-face-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Renewal Elixir Face Oil'
-    },
-    'harmonic-elixir-face-oil': { 
-      fullTitle: 'Full Size', 
-      travelTitle: 'Travel Size',
-      productTitle: 'Harmonic Elixir Face Oil'
-    }
+    'radiance-ritual-shower-oil': { productTitle: 'Radiance Ritual Shower Oil' },
+    'rejuvenating-shea-body-butter': { productTitle: 'Rejuvenating Shea Body Butter' },
+    'revitalizing-mango-body-butter': { productTitle: 'Revitalizing Mango Body Butter' },
+    'golden-aura-body-oil': { productTitle: 'Golden Aura Body Oil' },
+    'balance-elixir-face-oil': { productTitle: 'Balance Elixir Face Oil' },
+    'timeless-elixir-face-oil': { productTitle: 'Timeless Elixir Face Oil' },
+    'renewal-elixir-face-oil': { productTitle: 'Renewal Elixir Face Oil' },
+    'harmonic-elixir-face-oil': { productTitle: 'Harmonic Elixir Face Oil' }
   };
 
   // Inject CSS for toggle buttons
@@ -555,31 +522,80 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+    .cart-size-toggle-btn.loading {
+      position: relative;
+      color: transparent !important;
+    }
+    .cart-size-toggle-btn.loading::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      top: 50%;
+      left: 50%;
+      margin: -6px 0 0 -6px;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    .cart-size-toggle-btn.active.loading::after {
+      border-color: white;
+      border-right-color: transparent;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   `;
   document.head.appendChild(style);
 
+  // Format price in cents to currency string
+  function formatMoney(cents) {
+    return '$' + (cents / 100).toFixed(2);
+  }
+
+  // Update cart totals in the UI
+  async function updateCartTotals() {
+    const cartResponse = await fetch('/cart.js');
+    const cart = await cartResponse.json();
+    
+    // Update subtotal displays
+    const subtotalEls = document.querySelectorAll('[data-cart-total-price], .cart__total__money');
+    subtotalEls.forEach(el => {
+      el.textContent = formatMoney(cart.total_price);
+    });
+
+    // Update item count displays
+    const countEls = document.querySelectorAll('[data-cart-items-qty]');
+    countEls.forEach(el => {
+      const count = cart.item_count;
+      el.textContent = count === 1 ? '(1 item)' : `(${count} items)`;
+    });
+
+    // Trigger theme's cart update events
+    document.dispatchEvent(new CustomEvent('cart:updated', { detail: cart }));
+    
+    return cart;
+  }
+
   async function initCartSizeToggle() {
-    // Fetch current cart data
     const cartResponse = await fetch('/cart.js');
     const cart = await cartResponse.json();
     
     if (!cart.items || cart.items.length === 0) return;
 
-    // For each cart item, check if it's a toggleable product
     for (const item of cart.items) {
       const handle = item.handle;
       const productConfig = PRODUCT_VARIANTS[handle];
       
       if (!productConfig) continue;
 
-      // Fetch the product data to get all variants
       try {
         const productResponse = await fetch(`/products/${handle}.js`);
         const product = await productResponse.json();
         
         if (!product.variants || product.variants.length < 2) continue;
 
-        // Find Full Size and Travel Size variants
         let fullVariant = null;
         let travelVariant = null;
         
@@ -587,29 +603,21 @@
           const title = variant.title.toLowerCase();
           if (title.includes('travel') || title.includes('mini')) {
             travelVariant = variant;
-          } else if (title.includes('full') || !travelVariant) {
+          } else {
             fullVariant = variant;
           }
         }
 
         if (!fullVariant || !travelVariant) continue;
 
-        // Find the cart item element
-        const itemElement = document.querySelector(`[data-variant-id="${item.variant_id}"], [data-id="${item.id}"], [data-key="${item.key}"]`);
-        
-        if (!itemElement) {
-          // Try finding by product URL or title
-          const cartItems = document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]');
-          for (const el of cartItems) {
-            const link = el.querySelector('a[href*="' + handle + '"]');
-            const title = el.querySelector('.cart__item__title, .cart-item__title, [data-cart-item-title]');
-            if (link || (title && title.textContent.includes(productConfig.productTitle))) {
-              addToggleToItem(el, item, fullVariant, travelVariant);
-              break;
-            }
+        const cartItems = document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]');
+        for (const el of cartItems) {
+          const link = el.querySelector('a[href*="' + handle + '"]');
+          const title = el.querySelector('.cart__item__title, .cart-item__title, [data-cart-item-title]');
+          if (link || (title && title.textContent.includes(productConfig.productTitle))) {
+            addToggleToItem(el, item, fullVariant, travelVariant, product);
+            break;
           }
-        } else {
-          addToggleToItem(itemElement.closest('.cart__item, .cart-item, [data-cart-item]') || itemElement, item, fullVariant, travelVariant);
         }
       } catch (err) {
         console.error('Error fetching product data for', handle, err);
@@ -617,37 +625,36 @@
     }
   }
 
-  function addToggleToItem(itemElement, cartItem, fullVariant, travelVariant) {
-    // Don't add toggle if it already exists
+  function addToggleToItem(itemElement, cartItem, fullVariant, travelVariant, product) {
     if (itemElement.querySelector('.cart-size-toggle')) return;
 
     const isFullSize = cartItem.variant_id === fullVariant.id;
     
-    // Create toggle container
     const toggleDiv = document.createElement('div');
     toggleDiv.className = 'cart-size-toggle';
+    toggleDiv.dataset.cartKey = cartItem.key;
     
-    // Full Size button
     const fullBtn = document.createElement('button');
     fullBtn.type = 'button';
     fullBtn.className = 'cart-size-toggle-btn' + (isFullSize ? ' active' : '');
     fullBtn.textContent = 'Full Size';
     fullBtn.dataset.variantId = fullVariant.id;
+    fullBtn.dataset.price = fullVariant.price;
     
-    // Travel Size button
     const travelBtn = document.createElement('button');
     travelBtn.type = 'button';
     travelBtn.className = 'cart-size-toggle-btn' + (!isFullSize ? ' active' : '');
     travelBtn.textContent = 'Travel Size';
     travelBtn.dataset.variantId = travelVariant.id;
+    travelBtn.dataset.price = travelVariant.price;
 
-    // Click handlers
-    const handleToggle = async (newVariantId, clickedBtn, otherBtn) => {
+    const handleToggle = async (newVariant, clickedBtn, otherBtn) => {
       if (clickedBtn.classList.contains('active')) return;
       
-      // Disable buttons during update
+      // Show loading state
       fullBtn.disabled = true;
       travelBtn.disabled = true;
+      clickedBtn.classList.add('loading');
       
       try {
         // Remove current item
@@ -661,33 +668,66 @@
         });
 
         // Add new variant
-        await fetch('/cart/add.js', {
+        const addResponse = await fetch('/cart/add.js', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             items: [{
-              id: newVariantId,
+              id: newVariant.id,
               quantity: cartItem.quantity
             }]
           })
         });
+        
+        const addedItems = await addResponse.json();
+        const newItem = addedItems.items ? addedItems.items[0] : addedItems;
 
-        // Reload the page to show updated cart
-        window.location.reload();
+        // Update toggle button states
+        clickedBtn.classList.remove('loading');
+        clickedBtn.classList.add('active');
+        otherBtn.classList.remove('active');
+        
+        // Update the cart item key for future toggles
+        cartItem.key = newItem.key;
+        cartItem.variant_id = newVariant.id;
+        toggleDiv.dataset.cartKey = newItem.key;
+
+        // Update price display for this item
+        const priceEl = itemElement.querySelector('.cart__item__price, .cart-item__price, [data-cart-item-price]');
+        if (priceEl) {
+          priceEl.textContent = formatMoney(newVariant.price * cartItem.quantity);
+        }
+
+        // Update line price if separate from unit price
+        const linePriceEl = itemElement.querySelector('.cart__item__price--total, .cart-item__line-price');
+        if (linePriceEl) {
+          linePriceEl.textContent = formatMoney(newVariant.price * cartItem.quantity);
+        }
+
+        // Update variant title display
+        const variantEl = itemElement.querySelector('.cart__item__option, .cart-item__variant, [data-cart-item-variant]');
+        if (variantEl) {
+          variantEl.textContent = newVariant.title;
+        }
+
+        // Update cart totals
+        await updateCartTotals();
+
       } catch (err) {
         console.error('Error switching variant:', err);
+        clickedBtn.classList.remove('loading');
+      } finally {
         fullBtn.disabled = false;
         travelBtn.disabled = false;
       }
     };
 
-    fullBtn.addEventListener('click', () => handleToggle(fullVariant.id, fullBtn, travelBtn));
-    travelBtn.addEventListener('click', () => handleToggle(travelVariant.id, travelBtn, fullBtn));
+    fullBtn.addEventListener('click', () => handleToggle(fullVariant, fullBtn, travelBtn));
+    travelBtn.addEventListener('click', () => handleToggle(travelVariant, travelBtn, fullBtn));
 
     toggleDiv.appendChild(fullBtn);
     toggleDiv.appendChild(travelBtn);
 
-    // Insert toggle after the variant/option info or title
     const variantInfo = itemElement.querySelector('.cart__item__option, .cart-item__variant, [data-cart-item-variant]');
     const titleEl = itemElement.querySelector('.cart__item__title, .cart-item__title, [data-cart-item-title]');
     const insertAfter = variantInfo || titleEl;
@@ -695,22 +735,21 @@
     if (insertAfter) {
       insertAfter.parentNode.insertBefore(toggleDiv, insertAfter.nextSibling);
     } else {
-      // Fallback: prepend to item content area
       const content = itemElement.querySelector('.cart__item__content, .cart-item__content') || itemElement;
       content.appendChild(toggleDiv);
     }
   }
 
-  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initCartSizeToggle);
   } else {
     initCartSizeToggle();
   }
 
-  // Re-initialize after AJAX cart updates (for themes that update cart via AJAX)
-  document.addEventListener('cart:updated', initCartSizeToggle);
-  document.addEventListener('ajaxCart:updated', initCartSizeToggle);
+  document.addEventListener('cart:updated', () => {
+    document.querySelectorAll('.cart-size-toggle').forEach(el => el.remove());
+    setTimeout(initCartSizeToggle, 100);
+  });
 })();
 </script>
 
