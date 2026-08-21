@@ -147,8 +147,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '8.4oz | 250ml' %}
+                {% assign bp_travel_label = '3.4oz | 100ml' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
@@ -160,7 +160,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">Cleanses And Conditions In One Step</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (8.4oz | 250ml), Mini (3.4oz | 100ml)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -192,8 +192,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '4oz | 120g' %}
+                {% assign bp_travel_label = '2oz | 60g' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | NOURISHING</span>
@@ -205,7 +205,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Very Dry, Rough Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (4oz | 120g), Travel Size (2oz | 60g)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -221,8 +221,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '4oz | 120g' %}
+                {% assign bp_travel_label = '2oz | 60g' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | NOURISHING</span>
@@ -234,7 +234,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Normal To Dry Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (4oz | 120g), Travel Size (2oz | 60g)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -250,8 +250,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '3.4oz | 100ml' %}
+                {% assign bp_travel_label = '1.7oz | 50ml' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | GLOW ENHANCING</span>
@@ -263,7 +263,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Dry, Sensitive Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (3.4oz | 100ml), Travel Size (1.7oz | 50ml)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -295,8 +295,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '1oz | 30mL' %}
+                {% assign bp_travel_label = '.5oz | 15mL' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
@@ -308,7 +308,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">Deep Hydration, Visible Glow</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -324,8 +324,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '1oz | 30mL' %}
+                {% assign bp_travel_label = '.5oz | 15mL' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | CLARIFYING</span>
@@ -337,7 +337,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Oily, Blemish-Prone Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -353,8 +353,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '1oz | 30mL' %}
+                {% assign bp_travel_label = '.5oz | 15mL' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | BALANCING</span>
@@ -366,7 +366,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Combination Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
@@ -382,8 +382,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_full_label = '1oz | 30mL' %}
+                {% assign bp_travel_label = '.5oz | 15mL' %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | FIRMING</span>
@@ -395,7 +395,7 @@
                     <p class="text-sm md:text-base text-gray-500 mb-2 line-clamp-2">For Mature, Aging Skin</p>
                     <p class="bundle-price-display text-base md:text-lg font-bold text-[#1F4C35] mb-2" style="font-family:'DM Sans', sans-serif;">${{ bp_full.price | money_without_currency }}</p>
                     <div class="mb-3 flex-grow">
-                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">{{ bp_full.title }}, {{ bp_travel.title }}</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 mb-2" style="font-family:'DM Sans', sans-serif;">Full Size (1oz | 30mL), Travel Size (.5oz | 15mL)</p>
                         <div class="size-toggle-group inline-flex gap-1.5">
                             <button type="button" class="size-toggle-btn bg-[#1F4C35] text-white border border-[#1F4C35] rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_full.id }}" data-price="${{ bp_full.price | money_without_currency }} CAD">{{ bp_full_label }}</button>
                             <button type="button" class="size-toggle-btn bg-white text-[#1F4C35] border border-[#1F4C35]/30 rounded-full px-3 py-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider transition-colors" style="font-family:'DM Sans', sans-serif;" data-variant-id="{{ bp_travel.id }}" data-price="${{ bp_travel.price | money_without_currency }} CAD">{{ bp_travel_label }}</button>
