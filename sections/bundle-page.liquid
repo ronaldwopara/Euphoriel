@@ -147,8 +147,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
@@ -192,8 +192,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | NOURISHING</span>
@@ -221,8 +221,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | NOURISHING</span>
@@ -250,8 +250,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | NON GREASY | GLOW ENHANCING</span>
@@ -295,8 +295,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | HYDRATING</span>
@@ -324,8 +324,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | CLARIFYING</span>
@@ -353,8 +353,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | BALANCING</span>
@@ -382,8 +382,8 @@
                 {% for v in bp_product.variants %}
                     {% if v.title contains 'Travel' or v.title contains 'Mini' %}{% assign bp_travel = v %}{% else %}{% assign bp_full = v %}{% endif %}
                 {% endfor %}
-                {% assign bp_full_label = bp_full.title | split: '(' | first | strip %}
-                {% assign bp_travel_label = bp_travel.title | split: '(' | first | strip %}
+                {% assign bp_full_label = bp_full.title | split: '(' | last | remove: ')' | strip %}
+                {% assign bp_travel_label = bp_travel.title | split: '(' | last | remove: ')' | strip %}
                 <div class="flex flex-col h-full">
                     <div class="relative overflow-hidden mb-3 aspect-[4/5] flex items-center justify-center">
                         <span class="absolute top-2 left-2 right-2 z-10 inline-block w-fit bg-[#E4ED72] text-[#1F2937] text-[8px] md:text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-full leading-snug" style="font-family:'DM Sans', sans-serif;">WATERLESS | VEGAN | HYPOALLERGENIC | FIRMING</span>
