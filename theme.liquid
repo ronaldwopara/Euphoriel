@@ -369,26 +369,40 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
       .cart-size-toggle-btn.loading::after { content: ''; position: absolute; width: 14px; height: 14px; top: 50%; left: 50%; margin: -7px 0 0 -7px; border: 2px solid #1F4C35; border-right-color: transparent; border-radius: 50%; animation: cartSpin 0.5s linear infinite; }
       .cart-size-toggle-btn.active.loading::after { border-color: white; border-right-color: transparent; }
       @keyframes cartSpin { to { transform: rotate(360deg); } }
-      .cart-size-toggle-added [class*="variant"], .cart-size-toggle-added [class*="option"]:not(.cart-size-toggle):not(.cart-size-toggle-btn), .cart-size-toggle-added .cart__item__option { display: none !important; }
+      [data-size-toggle-processed] [class*="variant"], [data-size-toggle-processed] [class*="option"]:not(.cart-size-toggle):not(.cart-size-toggle-btn), [data-size-toggle-processed] .cart__item__option { display: none !important; }
+      .cart__total, .cart__discounts .cart__total { font-size: 1.1em; }
+      .cart__checkout { font-size: 1.05em; letter-spacing: 0.08em; }
     `;
     document.head.appendChild(style);
 
-    const formatMoney = (cents) => '$' + (cents / 100).toFixed(2);
+    const formatMoney = (cents) => {
+      const format = window.theme?.moneyWithCurrencyFormat || '${{amount}} CAD';
+      const amount = (cents / 100).toFixed(2);
+      return format.replace('{{amount}}', amount).replace('{{amount_with_comma_separator}}', amount.replace('.', ','));
+    };
 
     function init() {
-      document.querySelectorAll('[data-cart-item], .cart__item, .cart-item, .cart-drawer__item, .drawer__item, .mini-cart__item, [data-drawer-item], [data-line-item], .line-item, #cartItemsHolder > div, .cart-drawer [class*="item"], .drawer [class*="item"]').forEach(el => {
-        if (el.querySelector('.cart-size-toggle')) return;
+      document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]').forEach(el => {
+        if (el.dataset.sizeToggleProcessed) return;
+        if (el.closest('[data-size-toggle-processed]')) return;
+        
         let handle = null, variantData = null;
-        for (const [h, data] of Object.entries(VARIANTS)) {
-          if (el.querySelector(`a[href*="${h}"]`) || el.textContent.includes(data.title)) {
-            handle = h; variantData = data; break;
+        const link = el.querySelector('a[href*="/products/"]');
+        if (link) {
+          for (const [h, data] of Object.entries(VARIANTS)) {
+            if (link.href.includes(h)) { handle = h; variantData = data; break; }
+          }
+        }
+        if (!handle) {
+          for (const [h, data] of Object.entries(VARIANTS)) {
+            if (el.textContent.includes(data.title)) { handle = h; variantData = data; break; }
           }
         }
         if (!handle || !variantData) return;
 
+        el.dataset.sizeToggleProcessed = 'true';
         const text = el.textContent.toLowerCase();
         const isFullSize = !text.includes('travel') || text.includes('full');
-        el.classList.add('cart-size-toggle-added');
 
         const toggle = document.createElement('div');
         toggle.className = 'cart-size-toggle';
@@ -411,15 +425,55 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
             if (item) {
               await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: item.key, quantity: 0 }) });
               await fetch('/cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: [{ id: variant.id, quantity: item.quantity }] }) });
-              btn.classList.remove('loading'); btn.classList.add('active'); otherBtn.classList.remove('active');
+              
+              // Update button states
+              btn.classList.remove('loading');
+              btn.classList.add('active');
+              otherBtn.classList.remove('active');
+              
+              // Swap image for face oils
               const images = PRODUCT_IMAGES[handle];
-              if (images) { const imgEl = el.querySelector('img'); if (imgEl) { imgEl.src = (btn === travelBtn) ? images.travel : images.full; imgEl.srcset = ''; } }
-              el.querySelectorAll('[class*="price"]').forEach(p => { if (p.textContent.includes('$')) p.textContent = p.textContent.replace(/\$[\d,.]+/, formatMoney(variant.price * item.quantity)); });
+              if (images) {
+                const imgEl = el.querySelector('img');
+                if (imgEl) {
+                  imgEl.src = (btn === travelBtn) ? images.travel : images.full;
+                  imgEl.srcset = '';
+                }
+              }
+              
+              // Update line item price
+              const priceEl = el.querySelector('.cart__item__price, [class*="item__price"]');
+              if (priceEl) priceEl.textContent = formatMoney(variant.price);
+              
+              // Fetch updated cart totals
               const newCart = await (await fetch('/cart.js')).json();
-              document.querySelectorAll('.cart__total__strike').forEach(e => { e.textContent = e.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.original_total_price)); });
-              document.querySelectorAll('[data-cart-total-price], .cart__total__money').forEach(t => {
-                const walker = document.createTreeWalker(t, NodeFilter.SHOW_TEXT, null, false);
-                let node; while (node = walker.nextNode()) { if (/\$[\d,.]+/.test(node.textContent) && !node.parentElement.classList.contains('cart__total__strike')) node.textContent = node.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.total_price)); }
+              
+              // Update ITEMS subtotal (with strikethrough)
+              const itemsTotal = document.querySelector('[data-cart-items-total]');
+              if (itemsTotal) itemsTotal.textContent = formatMoney(newCart.original_total_price);
+              
+              // Update discount amount (in cart__discounts)
+              document.querySelectorAll('.cart__discounts .cart__total span:last-child').forEach(e => {
+                const discount = newCart.original_total_price - newCart.total_price;
+                e.textContent = '-' + formatMoney(discount);
+              });
+              
+              // Update final subtotal (struck-out and actual)
+              const totalMoney = document.querySelector('.cart__total__money[data-cart-total-price]');
+              if (totalMoney) {
+                const strike = totalMoney.querySelector('.cart__total__strike');
+                if (strike) strike.textContent = formatMoney(newCart.original_total_price);
+                // Update the text node (actual subtotal)
+                totalMoney.childNodes.forEach(node => {
+                  if (node.nodeType === 3 && node.textContent.includes('$')) {
+                    node.textContent = ' ' + formatMoney(newCart.total_price) + ' CAD';
+                  }
+                });
+              }
+              
+              // Update checkout button
+              document.querySelectorAll('.cart__checkout, button[name="checkout"]').forEach(e => {
+                e.textContent = e.textContent.replace(/[\$€£¥][\d,.]+\s*[A-Z]{0,3}/, formatMoney(newCart.total_price));
               });
             }
           } catch (e) { console.error('Switch error:', e); btn.classList.remove('loading'); }
@@ -429,7 +483,9 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
         fullBtn.onclick = () => switchTo(variantData.full, fullBtn, travelBtn);
         travelBtn.onclick = () => switchTo(variantData.travel, travelBtn, fullBtn);
         toggle.appendChild(fullBtn); toggle.appendChild(travelBtn);
-        const title = el.querySelector('[class*="title"] a, [class*="title"], h2, h3, h4');
+        
+        if (el.querySelector('.cart-size-toggle')) return;
+        const title = el.querySelector('.cart__item__title, .cart-item__title, [class*="item__title"], h2 a, h3 a');
         if (title?.parentNode) title.parentNode.insertBefore(toggle, title.nextSibling);
         else el.appendChild(toggle);
       });
