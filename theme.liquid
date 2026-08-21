@@ -370,13 +370,124 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
       .cart-size-toggle-btn.active.loading::after { border-color: white; border-right-color: transparent; }
       @keyframes cartSpin { to { transform: rotate(360deg); } }
       [data-size-toggle-processed] [class*="variant"], [data-size-toggle-processed] [class*="option"]:not(.cart-size-toggle):not(.cart-size-toggle-btn), [data-size-toggle-processed] .cart__item__option { display: none !important; }
-      [data-cart-items-total] { text-decoration: line-through; opacity: 0.6; }
+      .cart__total--items span { text-decoration: line-through; opacity: 0.6; }
+      [data-cart-page] .cart__total--items span { text-decoration: none; opacity: 1; }
+      .cart__total--items, .cart__total--grand { font-size: 1.1em; }
+      .cart__checkout { font-size: 1.05em; }
+      .cart-clear-all-holder { display: flex; justify-content: flex-end; margin: 10px 0 4px; padding-right: 18px; }
+      [data-cart-page] .cart-clear-all-holder { padding-right: 0; }
+      .cart-clear-all { font-family: 'DM Sans', -apple-system, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background: none !important; border: none !important; color: #1F4C35 !important; text-decoration: underline; text-underline-offset: 3px; cursor: pointer !important; padding: 4px 0; line-height: 1; }
+      .cart-clear-all.is-armed { color: #B3261E !important; }
+      .cart-clear-all:disabled { opacity: 0.5; }
     `;
     document.head.appendChild(style);
 
-    const formatMoney = (cents) => '$' + (cents / 100).toFixed(2);
+    let cartCurrency = {{ cart.currency.iso_code | json }};
+    const PRICE_RE = /[A-Z]{0,2}[$€£¥]\s?[\d.,]+/;
+    const formatMoney = (cents) => {
+      try { return new Intl.NumberFormat('en-CA', { style: 'currency', currency: cartCurrency }).format(cents / 100); }
+      catch (err) { return '$' + (cents / 100).toFixed(2); }
+    };
+    // Replace just the price portion of an element's text, preserving bullets/currency codes
+    const replacePrice = (el, cents) => {
+      if (PRICE_RE.test(el.textContent)) el.textContent = el.textContent.replace(PRICE_RE, formatMoney(cents));
+      else el.textContent = formatMoney(cents);
+    };
+    // Replace the price inside the first matching descendant text node, keeping child
+    // elements (bullet separators, spans) intact
+    const replacePriceInTextNodes = (el, cents) => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (PRICE_RE.test(node.textContent)) {
+          node.textContent = node.textContent.replace(PRICE_RE, formatMoney(cents));
+          return true;
+        }
+      }
+      return false;
+    };
+    // Find the ITEMS (pre-discount total) row regardless of which markup rendered it
+    const findItemsRow = () => {
+      const attr = document.querySelector('[data-cart-items-total]');
+      if (attr) return { row: attr.closest('.cart__total') || attr.parentElement, priceEl: attr };
+      for (const row of document.querySelectorAll('.cart__total')) {
+        if (row.closest('.cart__discounts')) continue;
+        const spans = row.querySelectorAll('span');
+        if (spans.length >= 2 && /^items\b/i.test(spans[0].textContent.trim())) {
+          return { row, priceEl: spans[spans.length - 1] };
+        }
+      }
+      return null;
+    };
+    // Strike through the ITEMS row (label + price) wherever it appears, and mark the
+    // Subtotal row so only those two rows get the larger font (discount rows stay normal)
+    const decorateItemsRow = () => {
+      const found = findItemsRow();
+      if (found && found.row) found.row.classList.add('cart__total--items');
+      document.querySelectorAll('.cart__total').forEach(row => {
+        const label = row.querySelector('span');
+        if (label && /^(sub)?total/i.test(label.textContent.trim())) row.classList.add('cart__total--grand');
+      });
+    };
+
+    // Add a "Clear cart" button above the line items (cart page and drawer alike),
+    // with a second-click confirmation before wiping the cart
+    const initClearAll = () => {
+      document.querySelectorAll('.cart__items, [data-items-holder], .cart-drawer__items').forEach(holder => {
+        if (!holder.parentElement) return;
+        const hasItems = !!holder.querySelector('.cart__item, .cart-item, [data-cart-item]');
+        let bar = holder.parentElement.querySelector(':scope > .cart-clear-all-holder');
+        if (!bar) {
+          if (!hasItems) return;
+          bar = document.createElement('div');
+          bar.className = 'cart-clear-all-holder';
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'cart-clear-all';
+          b.textContent = 'Clear cart';
+          let armed = false, timer;
+          const reset = () => { armed = false; b.classList.remove('is-armed'); b.textContent = 'Clear cart'; };
+          b.onclick = async () => {
+            if (!armed) {
+              armed = true;
+              b.classList.add('is-armed');
+              b.textContent = 'Click again to confirm';
+              timer = setTimeout(reset, 3000);
+              return;
+            }
+            clearTimeout(timer);
+            b.disabled = true;
+            b.textContent = 'Clearing…';
+            try {
+              const cleared = await (await fetch('/cart/clear.js', { method: 'POST' })).json();
+              // Remove line items and show the theme's empty-cart state in place
+              document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]').forEach(i => i.remove());
+              document.querySelectorAll('[data-empty-message], .cart__empty').forEach(e => e.classList.remove('hidden'));
+              document.querySelectorAll('.cart__aside, [data-foot-holder]').forEach(e => e.classList.add('hidden'));
+              // Zero out cart count badges and "X items" labels
+              document.querySelectorAll('[data-cart-count], .cart-count, .cart__counter, .cart__indicator__counter').forEach(e => { e.textContent = '0'; });
+              document.querySelectorAll('[data-cart-items-qty]').forEach(e => { e.textContent = e.textContent.replace(/\d+/, '0'); });
+              // Let the theme's own JS react to the change
+              document.dispatchEvent(new CustomEvent('theme:cart:change', { detail: { cart: cleared }, bubbles: true }));
+              b.disabled = false;
+              reset();
+              bar.style.display = 'none';
+            } catch (err) {
+              console.error('Clear cart error:', err);
+              b.disabled = false;
+              reset();
+            }
+          };
+          bar.appendChild(b);
+          holder.parentElement.insertBefore(bar, holder);
+        }
+        bar.style.display = hasItems ? '' : 'none';
+      });
+    };
 
     function init() {
+      decorateItemsRow();
+      initClearAll();
       document.querySelectorAll('.cart__item, .cart-item, [data-cart-item]').forEach(el => {
         if (el.dataset.sizeToggleProcessed) return;
         if (el.closest('[data-size-toggle-processed]')) return;
@@ -416,6 +527,7 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
           btn.classList.add('loading');
           try {
             const cart = await (await fetch('/cart.js')).json();
+            if (cart.currency) cartCurrency = cart.currency;
             const item = cart.items.find(i => i.handle === handle);
             if (item) {
               await fetch('/cart/change.js', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: item.key, quantity: 0 }) });
@@ -439,8 +551,8 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
               // Update line item price (unit price * quantity)
               const priceEls = el.querySelectorAll('[class*="price"], .money');
               priceEls.forEach(p => {
-                if (p.textContent.includes('$') && !p.closest('.cart__total')) {
-                  p.textContent = formatMoney(variant.price * item.quantity);
+                if (PRICE_RE.test(p.textContent) && !p.closest('.cart__total')) {
+                  replacePrice(p, variant.price * item.quantity);
                 }
               });
               
@@ -448,35 +560,36 @@ template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}
               const newCart = await (await fetch('/cart.js')).json();
               
               // Update ITEMS subtotal (with strikethrough)
-              const itemsTotal = document.querySelector('[data-cart-items-total]');
-              if (itemsTotal) itemsTotal.textContent = formatMoney(newCart.original_total_price);
+              const itemsRow = findItemsRow();
+              if (itemsRow) {
+                itemsRow.row.classList.add('cart__total--items');
+                replacePrice(itemsRow.priceEl, newCart.original_total_price);
+              }
               
               // Update discount amount (in cart__discounts)
               document.querySelectorAll('.cart__discounts .cart__total span:last-child').forEach(e => {
                 const discount = newCart.original_total_price - newCart.total_price;
-                e.textContent = '-' + formatMoney(discount);
+                if (PRICE_RE.test(e.textContent)) replacePrice(e, discount);
+                else e.textContent = '-' + formatMoney(discount);
               });
               
               // Update final subtotal (struck-out and actual)
               const totalMoney = document.querySelector('.cart__total__money[data-cart-total-price]');
               if (totalMoney) {
                 const strike = totalMoney.querySelector('.cart__total__strike');
-                if (strike) strike.textContent = formatMoney(newCart.original_total_price);
+                if (strike) replacePrice(strike, newCart.original_total_price);
                 // Update the text node (actual subtotal) - replace only the price portion
                 totalMoney.childNodes.forEach(node => {
-                  if (node.nodeType === 3 && node.textContent.includes('$')) {
-                    node.textContent = node.textContent.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
+                  if (node.nodeType === 3 && PRICE_RE.test(node.textContent)) {
+                    node.textContent = node.textContent.replace(PRICE_RE, formatMoney(newCart.total_price));
                   }
                 });
               }
               
-              // Update checkout button - preserve bullet separator if present
+              // Update checkout button price without touching its child elements,
+              // so bullet separators and spacing spans survive
               document.querySelectorAll('.cart__checkout, button[name="checkout"]').forEach(e => {
-                const text = e.textContent;
-                if (text.includes('$')) {
-                  // Replace just the price, preserving everything else (bullet, spacing, currency code)
-                  e.textContent = text.replace(/\$[\d,.]+/, formatMoney(newCart.total_price));
-                }
+                replacePriceInTextNodes(e, newCart.total_price);
               });
             }
           } catch (e) { console.error('Switch error:', e); btn.classList.remove('loading'); }

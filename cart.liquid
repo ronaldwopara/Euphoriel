@@ -307,10 +307,10 @@
   endif
 -%}
 
-<div class="cart__total{% if cart_total_hidden %} hidden{% endif %}">
+<div class="cart__total cart__total--items{% if cart_total_hidden %} hidden{% endif %}">
   <span>{{- 'cart.general.subtotal_items' | t -}}</span>
 
-  <span data-cart-items-total style="text-decoration: line-through; opacity: 0.6;">
+  <span data-cart-items-total>
     {%- liquid
       if original_subtotal == 0
         echo 'products.product.free' | t
