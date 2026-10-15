@@ -399,11 +399,9 @@
   }
   .lead-input:focus { border-color: var(--q-green); }
   .lead-consent {
-    display: flex; align-items: flex-start; gap: 10px; text-align: left;
-    padding: 2px 4px 4px;
+    margin: 0; padding: 2px 4px 4px; text-align: left;
+    font-size: 0.7rem; color: var(--q-muted); line-height: 1.6;
   }
-  .lead-consent input { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; accent-color: var(--q-green); }
-  .lead-consent label { font-size: 0.7rem; color: var(--q-muted); line-height: 1.6; }
 
   .lead-skip-link {
     background: none; border: none; padding: 4px;
@@ -649,12 +647,9 @@
         </div>
         <input type="email" id="leadEmail" placeholder="Email" class="lead-input" required>
 
-        <div class="lead-consent">
-          <input type="checkbox" id="leadConsent">
-          <label for="leadConsent">
-            Optional: check this box to also receive marketing emails from Euphoriel. Not required to get your results — unsubscribe anytime.
-          </label>
-        </div>
+        <p class="lead-consent">
+          By submitting, you agree to receive marketing emails from Euphoriel. Unsubscribe anytime.
+        </p>
 
         <button type="submit" class="eq-btn eq-btn--primary eq-btn--md eq-btn--block">Get My Results</button>
         <button type="button" id="skipLeadBtn" class="lead-skip-link">Skip this step</button>
@@ -973,17 +968,23 @@
               }
             }
           },
-          list_id: KLAVIYO_LIST_ID,
+          custom_source: 'Skin Quiz',
+        },
+        relationships: {
+          list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
         }
       }
     };
 
     try {
-      await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_PUBLIC_KEY}`, {
+      const res = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_PUBLIC_KEY}`, {
         method:  'POST',
-        headers: { 'content-type': 'application/json', 'revision': '2023-12-15' },
+        headers: { 'content-type': 'application/vnd.api+json', 'revision': '2026-10-15' },
         body:    JSON.stringify(payload),
       });
+      if (!res.ok) {
+        console.warn('Klaviyo rejected the subscription:', res.status, await res.text());
+      }
     } catch (err) {
       console.warn('Klaviyo submission failed:', err);
       // Non-blocking — still show result even if Klaviyo fails
