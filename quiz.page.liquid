@@ -702,6 +702,7 @@
   const questions = [
     {
       q: "How would you describe your skin type?",
+      key: "skin_type",
       options: [
         { label: "Oily, shiny, or breakout-prone",                 scores: { balance: 3 } },
         { label: "Combination — oily in some areas, dry in others", scores: { harmonic: 3 } },
@@ -711,6 +712,7 @@
     },
     {
       q: "What's your biggest skin concern right now?",
+      key: "skin_concern",
       options: [
         { label: "Clogged pores, blackheads, or breakouts",       scores: { balance: 3 } },
         { label: "Uneven texture or dullness",                    scores: { harmonic: 2, renewal: 1 } },
@@ -720,6 +722,7 @@
     },
     {
       q: "Right after cleansing, how does your skin feel?",
+      key: "skin_after_cleansing",
       options: [
         { label: "Oily again within an hour",                     scores: { balance: 3 } },
         { label: "Tight in some spots, oily in others",           scores: { harmonic: 3 } },
@@ -729,6 +732,7 @@
     },
     {
       q: "What's the #1 result you want from your skincare routine?",
+      key: "skincare_goal",
       options: [
         { label: "Clearer skin and less shine",                   scores: { balance: 3 } },
         { label: "Balance — calm oily zones, hydrate dry zones",  scores: { harmonic: 3 } },
@@ -947,6 +951,14 @@
   }
 
   // ── Klaviyo lead submission ──
+  function quizProperties() {
+    const props = { skin_quiz_result: matchedKey };
+    questions.forEach((q, i) => {
+      if (answers[i]) props[q.key] = q.options[answers[i].idx].label;
+    });
+    return props;
+  }
+
   async function submitToKlaviyo(first, last, email) {
     const KLAVIYO_PUBLIC_KEY = 'WVZPTu';
     const KLAVIYO_LIST_ID    = 'YswWdg';
@@ -973,7 +985,7 @@
           email,
           first_name: first,
           last_name:  last,
-          properties: { skin_quiz_result: matchedKey },
+          properties: quizProperties(),
         }
       }
     };
