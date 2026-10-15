@@ -492,9 +492,12 @@
     .slide-up.center-cta { display: flex; justify-content: center; }
     .eq-btn--lg { width: 100%; max-width: 320px; }
 
-    .euphoriel-overlay { padding: 0; align-items: flex-end; }
+    /* iOS Safari's bottom toolbar overlaps fixed elements; lvh - svh is its height. */
+    .euphoriel-overlay { padding: 0 0 calc(100lvh - 100svh); align-items: flex-end; }
     .eq-modal-card { border-radius: 1.5rem 1.5rem 0 0; max-height: 92svh; }
     .eq-modal-card--quiz, .eq-modal-card--lead, .eq-modal-card--result { max-width: none; }
+    .eq-modal-card--quiz { height: auto; max-height: 88svh; }
+    #questionWrap { padding-bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px)); }
     .eq-modal-head { padding: 1.75rem 1.5rem 0; }
     .eq-modal-body { padding: 0 1.5rem; }
     .eq-modal-foot { padding: 1.1rem 1.5rem calc(1.4rem + env(safe-area-inset-bottom, 0px)); }
