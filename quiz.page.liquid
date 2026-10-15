@@ -951,23 +951,13 @@
     const KLAVIYO_PUBLIC_KEY = 'WVZPTu';
     const KLAVIYO_LIST_ID    = 'YswWdg';
 
-    const payload = {
+    // The subscription endpoint doesn't reliably save custom properties, so the
+    // quiz result is written with a separate profile upsert.
+    const subscription = {
       data: {
         type: 'subscription',
         attributes: {
-          profile: {
-            data: {
-              type: 'profile',
-              attributes: {
-                first_name:  first,
-                last_name:   last,
-                email:       email,
-                properties: {
-                  skin_quiz_result: matchedKey,
-                }
-              }
-            }
-          },
+          profile: { data: { type: 'profile', attributes: { email } } },
           custom_source: 'Skin Quiz',
         },
         relationships: {
@@ -976,15 +966,31 @@
       }
     };
 
-    try {
-      const res = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${KLAVIYO_PUBLIC_KEY}`, {
+    const profile = {
+      data: {
+        type: 'profile',
+        attributes: {
+          email,
+          first_name: first,
+          last_name:  last,
+          properties: { skin_quiz_result: matchedKey },
+        }
+      }
+    };
+
+    async function post(endpoint, body) {
+      const res = await fetch(`https://a.klaviyo.com/client/${endpoint}/?company_id=${KLAVIYO_PUBLIC_KEY}`, {
         method:  'POST',
         headers: { 'content-type': 'application/vnd.api+json', 'revision': '2026-10-15' },
-        body:    JSON.stringify(payload),
+        body:    JSON.stringify(body),
       });
       if (!res.ok) {
-        console.warn('Klaviyo rejected the subscription:', res.status, await res.text());
+        console.warn(`Klaviyo rejected ${endpoint}:`, res.status, await res.text());
       }
+    }
+
+    try {
+      await Promise.all([post('subscriptions', subscription), post('profiles', profile)]);
     } catch (err) {
       console.warn('Klaviyo submission failed:', err);
       // Non-blocking — still show result even if Klaviyo fails
