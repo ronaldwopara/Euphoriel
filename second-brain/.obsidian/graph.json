@@ -1,0 +1,32 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:Projects",
+      "color": {
+        "a": 1,
+        "rgb": 4025167
+      }
+    },
+    {
+      "query": "path:Conversations OR path:Messages",
+      "color": {
+        "a": 1,
+        "rgb": 12889400
+      }
+    },
+    {
+      "query": "path:Tasks OR tag:#task",
+      "color": {
+        "a": 1,
+        "rgb": 15250500
+      }
+    }
+  ]
+}

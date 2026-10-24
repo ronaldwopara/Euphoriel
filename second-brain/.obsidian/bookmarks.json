@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "type": "file",
+      "ctime": 1761314400000,
+      "path": "Home.md",
+      "title": "Home"
+    },
+    {
+      "type": "file",
+      "ctime": 1761314400001,
+      "path": "Tasks.md",
+      "title": "Tasks"
+    },
+    {
+      "type": "file",
+      "ctime": 1761314400002,
+      "path": "Inbox.md",
+      "title": "Inbox"
+    }
+  ]
+}
