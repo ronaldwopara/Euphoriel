@@ -1,0 +1,17 @@
+---
+description: Use the second brain as the source of project context
+alwaysApply: true
+---
+
+# Second brain
+
+Working memory for this job lives in `second-brain/`. [[Home]] is the briefing.
+
+Before you change theme files, write an email, or answer "what is going on," read:
+
+1. `second-brain/Home.md`
+2. `second-brain/Tasks.md`
+3. Today's note in `second-brain/Daily/` if it exists
+4. The active project note under `second-brain/Projects/`
+
+After a decision, a client ask, a Cursor conversation worth keeping, or a finished task, update those notes. File threads in `Conversations/`, incoming pings in `Messages/`, and work on `Tasks.md`. Do not invent messages or todos. Write what actually happened.
