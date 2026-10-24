@@ -966,6 +966,7 @@
   async function submitToKlaviyo(first, last, email) {
     const KLAVIYO_PUBLIC_KEY = 'WVZPTu';
     const KLAVIYO_LIST_ID    = 'YswWdg';
+    const props = quizProperties();
 
     // The subscription endpoint doesn't reliably save custom properties, so the
     // quiz result is written with a separate profile upsert.
@@ -989,7 +990,37 @@
           email,
           first_name: first,
           last_name:  last,
-          properties: quizProperties(),
+          properties: props,
+        }
+      }
+    };
+
+    // Metric event so the welcome flow can fire on every completion (incl. retakes).
+    // unique_id must change each time or Klaviyo may treat it as a duplicate.
+    const event = {
+      data: {
+        type: 'event',
+        attributes: {
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email,
+                first_name: first,
+                last_name: last,
+                properties: props,
+              }
+            }
+          },
+          metric: {
+            data: {
+              type: 'metric',
+              attributes: { name: 'Completed Skin Quiz' }
+            }
+          },
+          properties: props,
+          unique_id: 'skin-quiz-' + email + '-' + Date.now() + '-' + matchedKey,
+          time: new Date().toISOString(),
         }
       }
     };
@@ -1006,7 +1037,11 @@
     }
 
     try {
-      await Promise.all([post('subscriptions', subscription), post('profiles', profile)]);
+      await Promise.all([
+        post('subscriptions', subscription),
+        post('profiles', profile),
+        post('events', event),
+      ]);
     } catch (err) {
       console.warn('Klaviyo submission failed:', err);
       // Non-blocking — still show result even if Klaviyo fails
